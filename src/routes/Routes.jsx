@@ -14,6 +14,8 @@ import MyInventory from '../pages/Dashboard/Seller/MyInventory'
 import ManageOrders from '../pages/Dashboard/Seller/ManageOrders'
 import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import { createBrowserRouter } from 'react-router'
+import SignUpHr from '../pages/SignUp/SignUpHr'
+import SignUpEmployee from '../pages/SignUp/SignUpEmployee'
 
 export const router = createBrowserRouter([
   {
@@ -31,8 +33,8 @@ export const router = createBrowserRouter([
       },
     ],
   },
-  { path: '/login', element: <Login /> },
-  { path: '/signup', element: <SignUp /> },
+  { path: '/join-employee', element: <SignUpEmployee /> },
+  { path: '/join-hr', element: <SignUpHr /> },
   {
     path: '/dashboard',
     element: (
