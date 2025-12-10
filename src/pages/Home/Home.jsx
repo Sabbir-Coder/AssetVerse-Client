@@ -54,27 +54,7 @@ const Home = () => {
         ease: 'power3.out'
       });
 
-      // Stats counter animation
-      gsap.utils.toArray('.stat-number').forEach((el, i) => {
-        const end = parseInt(el.textContent.replace(/[^0-9]/g, ''));
-        gsap.fromTo(el, { textContent: 0 }, {
-          scrollTrigger: {
-            trigger: statsRef.current,
-            start: 'top 80%',
-          },
-          textContent: end,
-          duration: 2,
-          ease: 'power1.inOut',
-          snap: { textContent: 1 },
-          stagger: 0.2,
-          onUpdate: function () {
-            el.textContent = Math.floor(el.textContent);
-          },
-          onComplete: function () {
-            el.textContent = end.toLocaleString();
-          }
-        });
-      });
+
 
       // Steps animation
       gsap.from('.step-item', {
@@ -127,7 +107,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-gradient-to-b from-white to-gray-50">
+    <div className="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden bg-linear-to-b from-white to-gray-50">
 
       {/* Hero Section */}
       <main>
@@ -202,7 +182,7 @@ const Home = () => {
         </section>
 
         {/* Testimonials Section with Swiper */}
-        <section className="py-16 bg-gradient-to-br from-primary/5 to-purple-50">
+        <section className="py-16 bg-linear-to-br from-primary/5 to-purple-50">
           <div className="max-w-4xl mx-auto px-4">
             <h2 className="text-[#111318] text-3xl md:text-4xl font-bold leading-tight text-center mb-12">
               Trusted by Industry Leaders
@@ -239,7 +219,7 @@ const Home = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-16 bg-gradient-to-r from-primary to-blue-700" ref={statsRef}>
+        <section className="py-16 bg-linear-to-r from-primary to-blue-700" ref={statsRef}>
           <div className="px-4 text-center">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <div className="flex flex-col items-center">
@@ -266,8 +246,8 @@ const Home = () => {
             </h2>
             <p className="text-gray-600 text-center mb-12">Simple setup, powerful results</p>
             <div className="space-y-8">
-              <div className="step-item flex items-start gap-6 p-6 rounded-2xl bg-gradient-to-r from-blue-50 to-transparent hover:shadow-lg transition-all duration-300">
-                <div className="flex-shrink-0 flex items-center justify-center size-14 bg-gradient-to-br from-primary to-blue-600 text-white rounded-2xl font-bold text-xl shadow-lg">
+              <div className="step-item flex items-start gap-6 p-6 rounded-2xl bg-linear-to-r from-blue-50 to-transparent hover:shadow-lg transition-all duration-300">
+                <div className="shrink-0 flex items-center justify-center size-14 bg-linear-to-br from-primary to-blue-600 text-white rounded-2xl font-bold text-xl shadow-lg">
                   1
                 </div>
                 <div>
@@ -275,8 +255,8 @@ const Home = () => {
                   <p className="text-gray-600 leading-relaxed">Create your account and set up your organization in minutes with our intuitive onboarding process.</p>
                 </div>
               </div>
-              <div className="step-item flex items-start gap-6 p-6 rounded-2xl bg-gradient-to-r from-green-50 to-transparent hover:shadow-lg transition-all duration-300">
-                <div className="flex-shrink-0 flex items-center justify-center size-14 bg-gradient-to-br from-green-500 to-green-600 text-white rounded-2xl font-bold text-xl shadow-lg">
+              <div className="step-item flex items-start gap-6 p-6 rounded-2xl bg-linear-to-r from-green-50 to-transparent hover:shadow-lg transition-all duration-300">
+                <div className="shrink-0 flex items-center justify-center size-14 bg-linear-to-br from-green-500 to-green-600 text-white rounded-2xl font-bold text-xl shadow-lg">
                   2
                 </div>
                 <div>
@@ -284,8 +264,8 @@ const Home = () => {
                   <p className="text-gray-600 leading-relaxed">Easily add your company assets using bulk import, QR codes, or our simple manual interface.</p>
                 </div>
               </div>
-              <div className="step-item flex items-start gap-6 p-6 rounded-2xl bg-gradient-to-r from-purple-50 to-transparent hover:shadow-lg transition-all duration-300">
-                <div className="flex-shrink-0 flex items-center justify-center size-14 bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-2xl font-bold text-xl shadow-lg">
+              <div className="step-item flex items-start gap-6 p-6 rounded-2xl bg-linear-to-r from-purple-50 to-transparent hover:shadow-lg transition-all duration-300">
+                <div className="shrink-0 flex items-center justify-center size-14 bg-linear-to-br from-purple-500 to-purple-600 text-white rounded-2xl font-bold text-xl shadow-lg">
                   3
                 </div>
                 <div>
@@ -298,7 +278,7 @@ const Home = () => {
         </section>
 
         {/* Final CTA Section */}
-        <section className="final-cta py-20 px-4 text-center bg-gradient-to-br from-primary via-blue-600 to-purple-600 relative overflow-hidden" style={{ marginTop: '3rem' }}>
+        <section className="final-cta py-20 px-4 text-center bg-linear-to-br from-primary via-blue-600 to-purple-600 relative overflow-hidden" style={{ marginTop: '3rem' }}>
           <div className="absolute inset-0 bg-grid-white/10"></div>
           <div className="relative z-10 max-w-3xl mx-auto">
             <h2 className="text-white text-3xl md:text-5xl font-bold leading-tight mb-4">

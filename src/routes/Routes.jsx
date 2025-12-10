@@ -1,21 +1,24 @@
 import Home from '../pages/Home/Home'
 import ErrorPage from '../pages/ErrorPage'
 import Login from '../pages/Login/Login'
-import SignUp from '../pages/SignUp/SignUp'
-import PlantDetails from '../pages/PlantDetails/PlantDetails'
 import PrivateRoute from './PrivateRoute'
 import DashboardLayout from '../layouts/DashboardLayout'
-import AddPlant from '../pages/Dashboard/Seller/AddPlant'
-import ManageUsers from '../pages/Dashboard/Admin/ManageUsers'
 import Profile from '../pages/Dashboard/Common/Profile'
-import Statistics from '../pages/Dashboard/Common/Statistics'
 import MainLayout from '../layouts/MainLayout'
-import MyInventory from '../pages/Dashboard/Seller/MyInventory'
-import ManageOrders from '../pages/Dashboard/Seller/ManageOrders'
-import MyOrders from '../pages/Dashboard/Customer/MyOrders'
 import { createBrowserRouter } from 'react-router'
 import SignUpHr from '../pages/SignUp/SignUpHr'
 import SignUpEmployee from '../pages/SignUp/SignUpEmployee'
+import AssetList from '../pages/Dashboard/HrPages/AssetList'
+import AddAsset from '../pages/Dashboard/HrPages/AddAsset'
+import AllRequests from '../pages/Dashboard/HrPages/AllRequests'
+
+import MyEmployeeList from '../pages/Dashboard/HrPages/MyEmployeeList'
+import MyAssets from '../pages/Dashboard/Employee/MyAsset'
+import RequestAsset from '../pages/Dashboard/Employee/RequestAsset'
+import MyTeam from '../pages/Dashboard/Employee/MyTeam'
+import UpgradePackage from '../pages/Dashboard/HrPages/UpgradePackage'
+
+
 
 export const router = createBrowserRouter([
   {
@@ -27,14 +30,11 @@ export const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-      {
-        path: '/plant/:id',
-        element: <PlantDetails />,
-      },
     ],
   },
   { path: '/join-employee', element: <SignUpEmployee /> },
   { path: '/join-hr', element: <SignUpHr /> },
+  { path: '/login', element: <Login /> },
   {
     path: '/dashboard',
     element: (
@@ -43,38 +43,77 @@ export const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // HR Routes Here
       {
-        index: true,
+        path: 'asset-list',
         element: (
           <PrivateRoute>
-            <Statistics />
+            <AssetList />
           </PrivateRoute>
         ),
       },
       {
-        path: 'add-plant',
+        path: 'add-asset',
         element: (
           <PrivateRoute>
-            <AddPlant />
+            <AddAsset />
           </PrivateRoute>
         ),
       },
       {
-        path: 'my-inventory',
+        path: 'all-requests',
         element: (
           <PrivateRoute>
-            <MyInventory />
+            <AllRequests />
           </PrivateRoute>
         ),
       },
       {
-        path: 'manage-users',
+        path: 'my-employee-list',
         element: (
           <PrivateRoute>
-            <ManageUsers />
+            <MyEmployeeList />
           </PrivateRoute>
         ),
       },
+      {
+        path: 'upgrade-package',
+        element: (
+          <PrivateRoute>
+            <UpgradePackage />
+          </PrivateRoute>
+        ),
+      },
+
+
+      // Employee Routes Here
+      {
+        path: 'my-assets',
+        element: (
+          <PrivateRoute>
+            <MyAssets />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'request-asset',
+        element: (
+          <PrivateRoute>
+            <RequestAsset />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-team',
+        element: (
+          <PrivateRoute>
+            <MyTeam />
+          </PrivateRoute>
+        ),
+      },
+
+
+      // Profile Route
       {
         path: 'profile',
         element: (
@@ -83,18 +122,7 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-      {
-        path: 'my-orders',
-        element: (
-          <PrivateRoute>
-            <MyOrders />
-          </PrivateRoute>
-        ),
-      },
-      {
-        path: 'manage-orders',
-        element: <ManageOrders />,
-      },
+
     ],
   },
 ])

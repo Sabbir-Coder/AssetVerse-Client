@@ -4,11 +4,17 @@ import LoadingSpinner from '../../components/Shared/LoadingSpinner'
 import useAuth from '../../hooks/useAuth'
 import { FcGoogle } from 'react-icons/fc'
 import { TbFidgetSpinner } from 'react-icons/tb'
+import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
+import { useState } from 'react'
+import { IoIosArrowRoundBack } from 'react-icons/io'
+
+
 
 const Login = () => {
   const { signIn, signInWithGoogle, loading, user, setLoading } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
+  const [showPassword, setShowPassword] = useState(true)
 
   const from = location.state || '/'
 
@@ -48,7 +54,11 @@ const Login = () => {
     }
   }
   return (
-    <div className='flex justify-center items-center min-h-screen bg-white'>
+    <div className='flex justify-center items-start min-h-screen bg-white'>
+             <div onClick={() => navigate('/')} className="flex items-center mt-7 gap-2 cursor-pointer font-bold btn btn-outline btn-primary">
+                          <IoIosArrowRoundBack className="text-4xl my-4" />
+                          <p>Home</p>
+                      </div>
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Log In</h1>
@@ -73,7 +83,7 @@ const Login = () => {
                 id='email'
                 required
                 placeholder='Enter Your Email Here'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900'
                 data-temp-mail-org='0'
               />
             </div>
@@ -83,22 +93,28 @@ const Login = () => {
                   Password
                 </label>
               </div>
-              <input
-                type='password'
+      <div className='relative'>
+                <input
+                type={showPassword ? 'password' : 'text'}
                 name='password'
                 autoComplete='current-password'
                 id='password'
                 required
                 placeholder='*******'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-lime-500 bg-gray-200 text-gray-900'
+                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900'
               />
+              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-gray-500 ">
+                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                {showPassword ? 'Show' : 'Hide'}
+              </button>
+      </div>
             </div>
           </div>
 
           <div>
             <button
               type='submit'
-              className='bg-lime-500 w-full rounded-md py-3 text-white'
+              className='bg-blue-700 w-full rounded-md py-3 text-white'
             >
               {loading ? (
                 <TbFidgetSpinner className='animate-spin m-auto' />
@@ -109,7 +125,7 @@ const Login = () => {
           </div>
         </form>
         <div className='space-y-1'>
-          <button className='text-xs hover:underline hover:text-lime-500 text-gray-400 cursor-pointer'>
+          <button className='text-xs hover:underline hover:text-blue-500 text-gray-400 cursor-pointer'>
             Forgot password?
           </button>
         </div>
@@ -132,8 +148,8 @@ const Login = () => {
           Don&apos;t have an account yet?{' '}
           <Link
             state={from}
-            to='/signup'
-            className='hover:underline hover:text-lime-500 text-gray-600'
+            to='/join-employee'
+            className='hover:underline hover:text-blue-500 text-blue-600 font-bold'
           >
             Sign up
           </Link>

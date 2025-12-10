@@ -90,7 +90,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                       to='/join-hr'
-                      className='text-gray-700 btn btn-primary text-white hover:bg-blue-600 font-medium transition'
+                      className=' btn btn-primary text-white hover:bg-blue-600 font-medium transition'
                     >
                       Join as HR Manager
                     </Link>

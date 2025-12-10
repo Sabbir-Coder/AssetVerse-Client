@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { IoIosArrowRoundBack } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
@@ -7,8 +7,6 @@ import { useState } from "react";
 const SignUpEmployee = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-    const [password, setPassword] = useState('');
 
 
     return (
@@ -111,18 +109,18 @@ const SignUpEmployee = () => {
                             </button>
                         </div>
                     </form>
-                      <div className="divider">OR</div>
+                    <div className="divider">OR</div>
                     <div>
-                        <p className="mt-5 text-center border-b border-gray-300 pb-3">Already have an account? <a href="#" className="font-medium text-primary cursor-pointer hover:underline">Login</a></p>
+                        <p className="mt-5 text-center border-b border-gray-300 pb-3">Already have an account? <Link to="/login" className="font-medium text-primary cursor-pointer hover:underline">Login</Link></p>
                     </div>
 
                     {/* Footer Text */}
                     <div className="mt-8 text-left">
                         <p className="text-sm text-gray-600 dark:text-gray-400">
                             By creating an account, you agree to our{" "}
-                            <a href="#" className="font-medium text-primary hover:underline">Terms of Service</a>{" "}
+                            <Link to="#" className="font-medium text-primary hover:underline">Terms of Service</Link>{" "}
                             and{" "}
-                            <a href="#" className="font-medium text-primary hover:underline">Privacy Policy</a>.
+                            <Link to="#" className="font-medium text-primary hover:underline">Privacy Policy</Link>.
                         </p>
                     </div>
                 </div>
