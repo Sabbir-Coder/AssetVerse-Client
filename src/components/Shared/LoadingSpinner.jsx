@@ -1,4 +1,4 @@
-import { ScaleLoader } from 'react-spinners'
+import { BarLoader } from 'react-spinners'
 
 const LoadingSpinner = ({ smallHeight }) => {
   return (
@@ -9,7 +9,7 @@ const LoadingSpinner = ({ smallHeight }) => {
       justify-center 
       items-center `}
     >
-      <ScaleLoader size={100} color='lime' />
+      <BarLoader height={20} width={100} size={100} color='blue' />
     </div>
   )
 }

@@ -21,10 +21,11 @@ const Sidebar = () => {
   const handleToggle = () => setActive(!isActive)
   const closeSidebar = () => setActive(false)
 
+
   return (
     <>
       {/* Mobile Toggle Button */}
-      <div className="md:hidden flex justify-between items-center z-20 px-4 py-3 bg-white shadow">
+      <div className="md:hidden flex justify-between items-center z-20 px-4 py-3  bg-white shadow">
         <button
           onClick={handleToggle}
           className="p-2 rounded focus:outline-none focus:bg-gray-200"
@@ -46,7 +47,7 @@ const Sidebar = () => {
       {/* Sidebar */}
       <div
         className={`
-          fixed inset-y-0 left-0 z-20 w-59 bg-white shadow-xl
+          fixed top-0 inset-y-0 left-0 z-20 max-h-[800px] w-59 bg-white shadow-xl
           transform transition-transform duration-200 ease-in-out
           ${isActive ? "translate-x-0" : "-translate-x-full"}
           md:translate-x-0 md:static

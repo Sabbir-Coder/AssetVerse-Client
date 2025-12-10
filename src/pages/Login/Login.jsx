@@ -55,11 +55,9 @@ const Login = () => {
   }
   return (
     <div className='flex justify-center items-start min-h-screen bg-white'>
-             <div onClick={() => navigate('/')} className="flex items-center mt-7 gap-2 cursor-pointer font-bold btn btn-outline btn-primary">
-                          <IoIosArrowRoundBack className="text-4xl my-4" />
-                          <p>Home</p>
-                      </div>
+
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
+  
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Log In</h1>
           <p className='text-sm text-gray-400'>
@@ -93,21 +91,21 @@ const Login = () => {
                   Password
                 </label>
               </div>
-      <div className='relative'>
+              <div className='relative'>
                 <input
-                type={showPassword ? 'password' : 'text'}
-                name='password'
-                autoComplete='current-password'
-                id='password'
-                required
-                placeholder='*******'
-                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900'
-              />
-              <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-gray-500 ">
-                {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
-                {showPassword ? 'Show' : 'Hide'}
-              </button>
-      </div>
+                  type={showPassword ? 'password' : 'text'}
+                  name='password'
+                  autoComplete='current-password'
+                  id='password'
+                  required
+                  placeholder='*******'
+                  className='w-full px-3 py-2 border rounded-md border-gray-300 focus:outline-blue-500 bg-gray-200 text-gray-900'
+                />
+                <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer text-gray-500 ">
+                  {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
+                  {showPassword ? 'Show' : 'Hide'}
+                </button>
+              </div>
             </div>
           </div>
 
@@ -136,14 +134,14 @@ const Login = () => {
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        <div
+        {/* <div
           onClick={handleGoogleSignIn}
           className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'
         >
           <FcGoogle size={32} />
 
           <p>Continue with Google</p>
-        </div>
+        </div> */}
         <p className='px-6 text-sm text-center text-gray-400'>
           Don&apos;t have an account yet?{' '}
           <Link
