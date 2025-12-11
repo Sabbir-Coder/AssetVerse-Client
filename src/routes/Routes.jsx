@@ -17,6 +17,7 @@ import MyAssets from '../pages/Dashboard/Employee/MyAsset'
 import RequestAsset from '../pages/Dashboard/Employee/RequestAsset'
 import MyTeam from '../pages/Dashboard/Employee/MyTeam'
 import UpgradePackage from '../pages/Dashboard/HrPages/UpgradePackage'
+import UpdateAsset from '../pages/Dashboard/HrPages/UpdateAsset'
 
 
 
@@ -49,6 +50,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <AssetList />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'assets/edit/:id',
+        element: (
+          <PrivateRoute>
+            <UpdateAsset />
           </PrivateRoute>
         ),
       },

@@ -2,25 +2,53 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import Swal from 'sweetalert2';
+import { Link } from 'react-router';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
 
 const AssetList = () => {
     const [search, setSearch] = useState("");
-    const { data: assets, isLoading, isError } = useQuery({
+    const { user } = useAuth();
+    const axiosSecure = useAxiosSecure()
+    const { data: assets, isLoading, isError, refetch } = useQuery({
         queryKey: ['assets'],
         queryFn: async () => {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/assets`);
+            const response = await axiosSecure.get(`/assets?email=${user?.email}`);
             return response.data;
         }
     })
-console.log(assets);
+    // console.log(assets);
 
 
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL}/assets/${id}`);
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    await axios.delete(`${import.meta.env.VITE_API_URL}/assets/${id}`);
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                    refetch()
+                }
+            });
+            console.log(id);
+
         } catch (error) {
             console.error("Error deleting asset:", error);
         }
+        refetch(); // Refetch assets after deletion
+
     };
 
     // Filter assets by product name
@@ -34,12 +62,12 @@ console.log(assets);
     if (isError) {
         return <div>Error loading assets.</div>;
     }
-   
+
     return (
         <div className="overflow-x-auto">
             <div className='flex justify-between items-center px-3'>
                 <div>
-                    <h2 className='font-bold text-3xl'>All Assets here</h2>
+                    <h2 className='font-bold text-3xl'>My All Assets here</h2>
                 </div>
                 <label className="input p-2 ml-3 my-4 flex items-center gap-2 focus-within:outline-blue-700">
                     <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -104,7 +132,7 @@ console.log(assets);
                                 <td>{asset.quantity}</td>
                                 <td>{asset.dateAdded}</td>
                                 <td className='flex justify-center md:flex-row flex-col gap-1 items-center'>
-                                    <button className="btn btn-danger btn-outline btn-sm">Edit</button>
+                                    <Link to={`/assets/edit/${asset._id}`} className="btn btn-danger btn-outline btn-sm">Edit</Link>
                                     <button onClick={() => handleDelete(asset._id)} className="btn btn-danger btn-sm bg-red-600 text-white">Delete</button>
                                 </td>
                             </tr>

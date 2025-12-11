@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router'
 import useAuth from '../../../hooks/useAuth'
 import logo from '../../../assets/images/logo-flat.png'
+import LoadingSpinner from '../../Shared/LoadingSpinner'
 
 // Icons
 import { GrLogout } from 'react-icons/gr'
@@ -13,14 +14,17 @@ import { AiOutlineClose } from 'react-icons/ai'
 import MenuItem from './Menu/MenuItem'
 import EmployeeMenu from './Menu/EmployeeMenu'
 import HrMenu from './Menu/HrMenu'
+import useRole from '../../../hooks/useRole'
 
 const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
+  const { role, isRoleLoading } = useRole()
 
   const handleToggle = () => setActive(!isActive)
   const closeSidebar = () => setActive(false)
 
+  if(isRoleLoading) return <LoadingSpinner />
 
   return (
     <>
@@ -32,8 +36,8 @@ const Sidebar = () => {
         >
           <AiOutlineBars className="h-6 w-6" />
         </button>
-       <Link to={'/'}>
-        <img src={logo} width='100' alt="" /></Link>
+        <Link to={'/'}>
+          <img src={logo} width='100' alt="" /></Link>
       </div>
 
       {/* Background Overlay */}
@@ -75,8 +79,8 @@ const Sidebar = () => {
           {/* Middle Content */}
           <div className="flex-1 overflow-y-auto mt-4">
             <nav>
-              <EmployeeMenu onItemClick={closeSidebar} />
-              <HrMenu onItemClick={closeSidebar} />
+              {role === 'employee' && <EmployeeMenu />}
+              {role === 'hr' && <HrMenu />}
             </nav>
           </div>
 

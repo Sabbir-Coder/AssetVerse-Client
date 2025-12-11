@@ -5,11 +5,10 @@ import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
 import { useMutation, } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
-import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 import SmallLoader from '../../../components/Shared/SmallLoader';
 
 const AddAsset = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
 
     const { isPending, isError, mutateAsync, reset: mutationReset } = useMutation({
         mutationFn: async (data) => {
@@ -73,7 +72,6 @@ const AddAsset = () => {
 
     }
 
-    if (isPending) return <LoadingSpinner />;
     if (isError) return <ErrorPage />;
 
     return (
@@ -219,17 +217,12 @@ const AddAsset = () => {
                         </div>
                         {/* Image */}
 
-
-                        {/* Submit Button */}
-                        {
-                            isPending ? <SmallLoader /> :
-                                <button
-                                    type='submit'
-                                    className='w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-green-700 '
-                                >
-                                    Save & Continue
-                                </button>
-                        }
+                        <button
+                            type='submit'
+                            className='w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-blue-700 '
+                        >
+                            {isPending || loading ? <SmallLoader /> : 'Save & Continue'}
+                        </button>
                     </div>
                 </div>
             </form>

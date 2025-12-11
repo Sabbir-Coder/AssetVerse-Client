@@ -7,6 +7,7 @@ import { TbFidgetSpinner } from 'react-icons/tb'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { useState } from 'react'
 import { IoIosArrowRoundBack } from 'react-icons/io'
+import SmallLoader from '../../components/Shared/SmallLoader'
 
 
 
@@ -18,7 +19,7 @@ const Login = () => {
 
   const from = location.state || '/'
 
-  if (loading) return <LoadingSpinner />
+
   if (user) return <Navigate to={from} replace={true} />
 
   // form submit handler
@@ -37,6 +38,7 @@ const Login = () => {
     } catch (err) {
       console.log(err)
       toast.error(err?.message)
+      setLoading(false)
     }
   }
 
@@ -57,7 +59,7 @@ const Login = () => {
     <div className='flex justify-center items-start min-h-screen bg-white'>
 
       <div className='flex flex-col max-w-md p-6 rounded-md sm:p-10 bg-gray-100 text-gray-900'>
-  
+
         <div className='mb-8 text-center'>
           <h1 className='my-3 text-4xl font-bold'>Log In</h1>
           <p className='text-sm text-gray-400'>
@@ -115,7 +117,7 @@ const Login = () => {
               className='bg-blue-700 w-full rounded-md py-3 text-white'
             >
               {loading ? (
-                <TbFidgetSpinner className='animate-spin m-auto' />
+                <SmallLoader />
               ) : (
                 'Continue'
               )}

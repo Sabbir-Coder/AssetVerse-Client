@@ -8,9 +8,11 @@ import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
 import { imageUpload } from "../../utils";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import SmallLoader from "../../components/Shared/SmallLoader";
 
 const SignUpEmployee = () => {
-    const { createUser, updateUserProfile } = useAuth();
+    const { createUser, updateUserProfile, loading ,setLoading} = useAuth();
     const from = location.state?.from?.pathname || "/";
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
@@ -25,17 +27,20 @@ const SignUpEmployee = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
+        setLoading(true)
         // Handle form submission logic here
         const { name, email, photo, password, dob } = data;
 
         const dateOfBirth = new Date(dob);
+        const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
         const ImageFile = photo[0];
 
 
         try {
             //1. Upload profile photo to imgbb
             const photoURL = await imageUpload(ImageFile);
-
+            await createUser(email, password);
+            await updateUserProfile(name, photoURL);
 
             //2. User Registration
             await axiosSecure.post('/users', {
@@ -43,23 +48,20 @@ const SignUpEmployee = () => {
                 email,
                 photoURL,
                 password,
-                dob,
-                role: 'employee'
+                dob: formattedDate,
+                role: 'employee',
+
             })
 
-            //3. Save username & profile photo
-             await axiosSecure.put('/users', {
-                name,
-                photoURL,
-                dob,
-                role: 'employee'
-            })
 
             navigate(from, { replace: true })
             toast.success('Signup Successful')
         } catch (err) {
             console.log(err)
             toast.error(err?.message)
+        }
+        finally {
+            setLoading(false)
         }
     }
 
@@ -80,7 +82,7 @@ const SignUpEmployee = () => {
     return (
         <div className="bg-background-light dark:bg-background-dark font-display min-h-screen w-full flex flex-col overflow-x-hidden">
             {/* Main */}
-                        <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 justify-between border-b border-border-light dark:border-border-dark">
+            <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 justify-between border-b border-border-light dark:border-border-dark">
                 <div className="flex items-center gap-3">
                     <button onClick={() => navigate(-1)} className="flex items-center justify-center rounded-full w-8 h-8 text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-300 cursor-pointer transition-colors">
                         <span className="material-symbols-outlined text-2xl">arrow_back</span>
@@ -156,7 +158,7 @@ const SignUpEmployee = () => {
                         <div>
                             <label className="form-label" htmlFor="email">Profile Picture</label>
                             <div className="relative">
-                                <input type="file" className="file-input"
+                                <input type="file" className="file-input w-full"
                                     {...register("photo", { required: "Profile Picture is required" })}
                                 />
                                 {errors.photo && (
@@ -219,7 +221,7 @@ const SignUpEmployee = () => {
                                 type="submit"
                                 className="w-full flex items-center justify-center rounded-lg h-12 px-5 bg-primary text-white text-base font-bold cursor-pointer tracking-[0.015em]"
                             >
-                                <span className="truncate">Create Account</span>
+                                {loading ? <SmallLoader /> : <span className="truncate">Create Account</span>}
                             </button>
                         </div>
                     </form>

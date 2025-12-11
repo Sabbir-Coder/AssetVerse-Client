@@ -3,12 +3,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import { imageUpload } from "../../utils";
+import { imageUpload, saveOrUpdateUser } from "../../utils";
 import SmallLoader from "../../components/Shared/SmallLoader";
-import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 
 const SignUpHr = () => {
-    const { createUser, updateUserProfile, loading } = useAuth();
+    const { createUser, updateUserProfile, loading, setLoading } = useAuth();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const from = "/"; // Default redirect
@@ -22,6 +21,8 @@ const SignUpHr = () => {
 
     const onSubmit = async (data) => {
         const { fullName, email, password, companyName, companyLogo, dob } = data;
+        const dateOfBirth = new Date(dob);
+        const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
         const imageFile = companyLogo[0];
 
         try {
@@ -30,6 +31,21 @@ const SignUpHr = () => {
             await createUser(email, password);
             await updateUserProfile(fullName, photoURL);
 
+            await saveOrUpdateUser({
+                name: fullName,
+                companyName,
+                companyLogo: photoURL,
+                email,
+                password,
+                dob: formattedDate,
+                role: 'hr',
+                packageLimit: parseInt(5),
+                currentEmployees: parseInt(0),
+                subscription: 'basic',
+            });
+
+
+
             navigate(from, { replace: true });
             toast.success('HR Account Created Successfully');
             console.log(data);
@@ -37,10 +53,9 @@ const SignUpHr = () => {
         } catch (err) {
             console.error(err);
             toast.error(err.message);
-        }
-    }
+        } 
+    };
 
-    if (loading) return <LoadingSpinner />
 
     return (
         <div className="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark min-h-screen flex flex-col transition-colors duration-300">
@@ -215,7 +230,7 @@ const SignUpHr = () => {
                         <div className="pt-4">
                             <button
                                 type="submit"
-                                className="flex cursor-pointer w-full justify-center rounded-lg bg-primary px-3 py-4 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                                className="flex cursor-pointer w-full justify-center rounded-lg bg-primary px-3 py-4 text-sm font-bold leading-6 text-white shadow-sm hover:bg-primary/90  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
                             >
                                 {loading ? <SmallLoader /> : "Create Account"}
                             </button>
@@ -225,7 +240,7 @@ const SignUpHr = () => {
                     <div className="mt-6 text-center text-sm">
                         <p className="text-text-light/60 dark:text-text-dark/60">
                             Already have an account?{' '}
-                            <Link to="/login" className="font-bold text-primary dark:text-white hover:text-secondary transition-colors">
+                            <Link to="/login" className="font-bold text-primary hover:text-secondary transition-colors">
                                 Sign in
                             </Link>
                         </p>
