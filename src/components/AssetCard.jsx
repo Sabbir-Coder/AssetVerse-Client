@@ -1,21 +1,23 @@
 import React from 'react';
 import Swal from 'sweetalert2';
 import useAuth from '../hooks/useAuth';
+import useAxiosSecure from '../hooks/useAxiosSecure';
 
 const AssetCard = ({ asset }) => {
   const { user } = useAuth()
+  const axiosSecure = useAxiosSecure();
   console.log(asset);
   const { productName, description, productType, quantity, image } = asset;
 
 
-  const handleRequest = (asset) => {
-    const { _id, productName, description, productType, companyName, hr } = asset;
+  const handleRequest = async (asset) => {
+    const { _id, productName, productType, companyName, hr } = asset;
     try {
       const requestData = {
         assetId: _id,
         productName,
-        description,
         productType,
+        requesterName: user.displayName,
         requesterEmail: user.email,
         HrEmail: hr.email,
         companyName,
@@ -25,29 +27,30 @@ const AssetCard = ({ asset }) => {
         note: '',
         processedBy: '',
       }
-      console.log(requestData);
+      // Handle asset request logic here
+      Swal.fire({
+        title: "Are you sure?",
+        text: "Want to send this request?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, send it!"
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await axiosSecure.post('/asset-requests', requestData);
+          Swal.fire({
+            title: "Sent!",
+            text: "Your request has been sent. Wait For HR Approval",
+            icon: "success"
+          });
+        }
+
+      })
     } catch (error) {
       console.error("Error creating request data:", error);
     }
-    // Handle asset request logic here
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Want to send this request?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, send it!"
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          title: "Sent!",
-          text: "Your request has been sent. Wait For Approval",
-          icon: "success"
-        });
-      }
-    });
-  }
+  };
 
   return (
     <div className="card  max-h-110 bg-white shadow-sm">

@@ -12,11 +12,13 @@ import LoadingSpinner from "../../components/Shared/LoadingSpinner";
 import SmallLoader from "../../components/Shared/SmallLoader";
 
 const SignUpEmployee = () => {
-    const { createUser, updateUserProfile, loading ,setLoading} = useAuth();
+    const { createUser, updateUserProfile, } = useAuth();
     const from = location.state?.from?.pathname || "/";
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const axiosSecure = useAxiosSecure()
+    // Local loading state (correct usage)
+    const [loading, setLoading] = useState(false);
 
 
     // react hook form
@@ -26,44 +28,53 @@ const SignUpEmployee = () => {
         formState: { errors },
     } = useForm()
 
-    const onSubmit = async (data) => {
-        setLoading(true)
-        // Handle form submission logic here
-        const { name, email, photo, password, dob } = data;
+const onSubmit = async (data) => {
+    console.log("Form submitted");
+    console.log("Loading set to true");
 
-        const dateOfBirth = new Date(dob);
-        const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
-        const ImageFile = photo[0];
+    const { name, email, photo, password, dob } = data;
+    const dateOfBirth = new Date(dob);
+    const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
+    const ImageFile = photo[0];
 
+    try {
+    setLoading(true);
 
-        try {
-            //1. Upload profile photo to imgbb
-            const photoURL = await imageUpload(ImageFile);
-            await createUser(email, password);
-            await updateUserProfile(name, photoURL);
+        console.log("Uploading image...");
+        const photoURL = await imageUpload(ImageFile);
+        console.log("Image uploaded:", photoURL);
 
-            //2. User Registration
-            await axiosSecure.post('/users', {
-                name,
-                email,
-                photoURL,
-                password,
-                dob: formattedDate,
-                role: 'employee',
+        console.log("Creating user...");
+        await createUser(email, password);
+        console.log("User created");
 
-            })
+        console.log("Updating user profile...");
+        await updateUserProfile(name, photoURL);
+        console.log("Profile updated");
 
+        console.log("Registering user in backend...");
+        await axiosSecure.post('/users', {
+            name,
+            email,
+            photoURL,
+            password,
+            dob: formattedDate,
+            role: 'employee',
+        });
+        console.log("Backend registration complete");
 
-            navigate(from, { replace: true })
-            toast.success('Signup Successful')
-        } catch (err) {
-            console.log(err)
-            toast.error(err?.message)
-        }
-        finally {
-            setLoading(false)
-        }
+        toast.success('Signup Successful');
+    } catch (err) {
+        console.error("Error occurred:", err);
+        toast.error(err?.message || "Something went wrong");
+    } finally {
+        setLoading(false);
+        console.log("Loading set to false");
     }
+
+    console.log("Navigating...");
+    navigate(from, { replace: true });
+};
 
     // Handle Google Signin
     //   const handleGoogleSignIn = async () => {

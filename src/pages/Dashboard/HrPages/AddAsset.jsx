@@ -3,12 +3,26 @@ import { useForm } from 'react-hook-form';
 import { imageUpload } from '../../../utils';
 import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
-import { useMutation, } from '@tanstack/react-query';
+import { useMutation, useQuery, } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import SmallLoader from '../../../components/Shared/SmallLoader';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const AddAsset = () => {
+    // UserQueryComponent.jsx
     const { user, loading } = useAuth();
+    const axiosSecure = useAxiosSecure();
+
+    const { data: userData } = useQuery({
+        queryKey: ["user", user?.email],
+        enabled: !!user?.email, // important: wait for user to load
+        queryFn: async () => {
+            const response = await axiosSecure.get(`/users/${user.email}`);
+            return response.data;
+        },
+    });
+
+    const companyName = userData?.companyName;
 
     const { isPending, isError, mutateAsync, reset: mutationReset } = useMutation({
         mutationFn: async (data) => {
@@ -45,8 +59,10 @@ const AddAsset = () => {
     } = useForm()
 
     const onsubmit = async (data) => {
-        const { productName, productType, description, quantity, image, companyName } = data;
+        const { productName, productType, description, quantity, image } = data;
         const imageFile = image[0];
+        console.log(data);
+
         try {
             const imageURL = await imageUpload(imageFile);
             const productData = {
@@ -153,11 +169,11 @@ const AddAsset = () => {
                                 name='name'
                                 id='name'
                                 type='text'
+                                disabled={true}
+                                defaultValue={companyName}
                                 placeholder='Company Name'
                                 required
-                                {...register("companyName", {
-                                    required: "Name is required"
-                                })}
+                                {...register("companyName")}
                             />
                             {errors["companyName"] && (
                                 <p className="mt-1 text-sm text-red-600">{errors["companyName"].message}</p>
@@ -216,13 +232,14 @@ const AddAsset = () => {
                             </div>
                         </div>
                         {/* Image */}
-
-                        <button
-                            type='submit'
-                            className='w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-blue-700 '
-                        >
-                            {isPending || loading ? <SmallLoader /> : 'Save & Continue'}
-                        </button>
+                        {isPending || loading ? <SmallLoader /> :
+                            <button
+                                type='submit'
+                                className='w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-blue-700 '
+                            >
+                                Save & Continue
+                            </button>
+                        }
                     </div>
                 </div>
             </form>

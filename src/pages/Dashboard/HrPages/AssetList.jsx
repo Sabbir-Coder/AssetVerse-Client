@@ -96,6 +96,7 @@ const AssetList = () => {
                 {/* head */}
                 <thead>
                     <tr>
+                        <th>No.</th>
                         <th>Image</th>
                         <th>Name</th>
                         <th>Type</th>
@@ -112,8 +113,9 @@ const AssetList = () => {
                             </td>
                         </tr>
                     ) : (
-                        filteredAssets && filteredAssets.map(asset => (
+                        filteredAssets && filteredAssets.map((asset, index) => (
                             <tr key={asset._id}>
+                                <th>{index + 1}</th>
                                 <td>
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">

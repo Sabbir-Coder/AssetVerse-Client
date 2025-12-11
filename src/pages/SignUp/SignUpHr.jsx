@@ -26,6 +26,7 @@ const SignUpHr = () => {
         const imageFile = companyLogo[0];
 
         try {
+            setLoading(true);
             // 1. Upload company logo/profile photo
             const photoURL = await imageUpload(imageFile);
             await createUser(email, password);
@@ -53,7 +54,9 @@ const SignUpHr = () => {
         } catch (err) {
             console.error(err);
             toast.error(err.message);
-        } 
+        } finally {
+            setLoading(false);
+        }
     };
 
 
