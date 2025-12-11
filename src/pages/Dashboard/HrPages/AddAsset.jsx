@@ -70,7 +70,7 @@ const AddAsset = () => {
                 productType,
                 description,
                 image: imageURL,
-                dateAdded: new Date(),
+                dateAdded: new Date().toLocaleDateString(),
                 quantity: parseInt(quantity),
                 companyName,
                 hr: {
@@ -232,14 +232,14 @@ const AddAsset = () => {
                             </div>
                         </div>
                         {/* Image */}
-                        {isPending || loading ? <SmallLoader /> :
+                        
                             <button
                                 type='submit'
                                 className='w-full cursor-pointer p-3 mt-5 text-center font-medium text-white transition duration-200 rounded shadow-md bg-blue-700 '
                             >
-                                Save & Continue
+                                {isPending ? <SmallLoader /> : "Save & Continue"}
                             </button>
-                        }
+                        
                     </div>
                 </div>
             </form>

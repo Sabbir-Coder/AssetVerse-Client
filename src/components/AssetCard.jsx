@@ -25,7 +25,7 @@ const AssetCard = ({ asset }) => {
         approvalDate: null,
         requestStatus: 'Pending',
         note: '',
-        processedBy: '',
+        processedBy: hr.email,
       }
       // Handle asset request logic here
       Swal.fire({

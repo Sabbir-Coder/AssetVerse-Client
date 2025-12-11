@@ -6,19 +6,14 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import useAuth from "../../hooks/useAuth";
-import { imageUpload } from "../../utils";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-import LoadingSpinner from "../../components/Shared/LoadingSpinner";
+import { imageUpload, saveOrUpdateUser } from "../../utils";
 import SmallLoader from "../../components/Shared/SmallLoader";
 
 const SignUpEmployee = () => {
-    const { createUser, updateUserProfile, } = useAuth();
-    const from = location.state?.from?.pathname || "/";
+    const { createUser, updateUserProfile, loading, setLoading } = useAuth();
     const navigate = useNavigate();
+    const from = "/"; // Default redirect
     const [showPassword, setShowPassword] = useState(false);
-    const axiosSecure = useAxiosSecure()
-    // Local loading state (correct usage)
-    const [loading, setLoading] = useState(false);
 
 
     // react hook form
@@ -28,74 +23,51 @@ const SignUpEmployee = () => {
         formState: { errors },
     } = useForm()
 
-const onSubmit = async (data) => {
-    console.log("Form submitted");
-    console.log("Loading set to true");
+    const onSubmit = async (data) => {
+        console.log("Form submitted");
+        console.log("Loading set to true");
 
-    const { name, email, photo, password, dob } = data;
-    const dateOfBirth = new Date(dob);
-    const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
-    const ImageFile = photo[0];
+        const { name, email, photo, password, dob } = data;
+        const dateOfBirth = new Date(dob);
+        const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
+        const ImageFile = photo[0];
 
-    try {
-    setLoading(true);
 
-        console.log("Uploading image...");
-        const photoURL = await imageUpload(ImageFile);
-        console.log("Image uploaded:", photoURL);
+        try {
+            setLoading(true);
 
-        console.log("Creating user...");
-        await createUser(email, password);
-        console.log("User created");
+            console.log("Uploading image...");
+            const photoURL = await imageUpload(ImageFile);
+            await createUser(email, password);
+            await updateUserProfile(name, photoURL);
 
-        console.log("Updating user profile...");
-        await updateUserProfile(name, photoURL);
-        console.log("Profile updated");
+            await saveOrUpdateUser({
+                name,
+                email,
+                photoURL,
+                password,
+                dob: formattedDate,
+                role: 'employee',
+            });
+            navigate(from, { replace: true });
+            toast.success('Employee Account Created Successfully');
+            console.log(data);
+        } catch (err) {
+            console.error("Error occurred:", err);
+            toast.error(err?.message || "Something went wrong");
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        console.log("Registering user in backend...");
-        await axiosSecure.post('/users', {
-            name,
-            email,
-            photoURL,
-            password,
-            dob: formattedDate,
-            role: 'employee',
-        });
-        console.log("Backend registration complete");
 
-        toast.success('Signup Successful');
-    } catch (err) {
-        console.error("Error occurred:", err);
-        toast.error(err?.message || "Something went wrong");
-    } finally {
-        setLoading(false);
-        console.log("Loading set to false");
-    }
-
-    console.log("Navigating...");
-    navigate(from, { replace: true });
-};
-
-    // Handle Google Signin
-    //   const handleGoogleSignIn = async () => {
-    //     try {
-    //       //User Registration using google
-    //       await signInWithGoogle()
-
-    //       navigate(from, { replace: true })
-    //       toast.success('Signup Successful')
-    //     } catch (err) {
-    //       console.log(err)
-    //       toast.error(err?.message)
-    //     }
-    //   }
 
     return (
         <div className="bg-background-light dark:bg-background-dark font-display min-h-screen w-full flex flex-col overflow-x-hidden">
             {/* Main */}
             <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 justify-between border-b border-border-light dark:border-border-dark">
                 <div className="flex items-center gap-3">
-                    <button onClick={() => navigate(-1)} className="flex items-center justify-center rounded-full w-8 h-8 text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-300 cursor-pointer transition-colors">
+                    <button onClick={() => navigate('/')} className="flex items-center justify-center rounded-full w-8 h-8 text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-300 cursor-pointer transition-colors">
                         <span className="material-symbols-outlined text-2xl">arrow_back</span>
                     </button>
                     <h1 className="text-primary text-xl font-bold leading-tight tracking-[-0.015em]">Create Account</h1>

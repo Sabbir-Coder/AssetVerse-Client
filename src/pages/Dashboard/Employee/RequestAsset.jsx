@@ -1,10 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
-import Swal from 'sweetalert2';
-import { Link } from 'react-router';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import useAuth from '../../../hooks/useAuth';
 import AssetCard from '../../../components/AssetCard';
 
 const RequestAsset = () => {

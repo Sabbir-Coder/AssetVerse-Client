@@ -12,7 +12,7 @@ const AssetList = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
     const { data: assets, isLoading, isError, refetch } = useQuery({
-        queryKey: ['assets'],
+        queryKey: ['assets', user?.email],
         queryFn: async () => {
             const response = await axiosSecure.get(`/assets?email=${user?.email}`);
             return response.data;
@@ -134,7 +134,7 @@ const AssetList = () => {
                                 <td>{asset.quantity}</td>
                                 <td>{asset.dateAdded}</td>
                                 <td className='flex justify-center md:flex-row flex-col gap-1 items-center'>
-                                    <Link to={`/assets/edit/${asset._id}`} className="btn btn-danger btn-outline btn-sm">Edit</Link>
+                                    <Link to={`/dashboard/assets/edit/${asset._id}`} className="btn btn-danger btn-outline btn-sm">Edit</Link>
                                     <button onClick={() => handleDelete(asset._id)} className="btn btn-danger btn-sm bg-red-600 text-white">Delete</button>
                                 </td>
                             </tr>

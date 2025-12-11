@@ -67,26 +67,32 @@ const AllRequests = () => {
     return (
         <div className="overflow-x-auto p-4">
             <h2 className="text-2xl font-bold mb-4">All Asset Requests</h2>
-            <table className="table-auto border-collapse border w-full">
+            <table className="table-auto border-collapse border border-gray-300 w-full">
                 <thead>
                     <tr>
-                        <th className="border px-4 py-2">Employee</th>
-                        <th className="border px-4 py-2">Asset</th>
-                        <th className="border px-4 py-2">Type</th>
-                        <th className="border px-4 py-2">Date</th>
-                        <th className="border px-4 py-2">Status</th>
-                        <th className="border px-4 py-2">Actions</th>
+                        <th className="border border-gray-300 px-4 py-2">Employee</th>
+                        <th className="border border-gray-300 px-4 py-2">Asset</th>
+                        <th className="border border-gray-300 px-4 py-2">Type</th>
+                        <th className="border border-gray-300 px-4 py-2">Date</th>
+                        <th className="border border-gray-300 px-4 py-2">Status</th>
+                        <th className="border border-gray-300 px-4 py-2">Actions</th>
+       
                     </tr>
                 </thead>
                 <tbody>
                     {requests?.map((req) => (
                         <tr key={req._id}>
-                            <td className="border px-4 py-2">{req.requesterName}</td>
-                            <td className="border px-4 py-2">{req.productName}</td>
-                            <td className="border px-4 py-2">{req.productType}</td>
-                            <td className="border px-4 py-2">{new Date(req.requestDate).toLocaleDateString()}</td>
-                            <td className="border px-4 py-2 font-bold">{req.requestStatus}</td>
-                            <td className="border px-4 py-2 flex gap-2">
+                            <td className="border border-gray-300 px-4 py-2">{req.requesterName}</td>
+                            <td className="border border-gray-300 px-4 py-2">{req.productName}</td>
+                            <td className="border border-gray-300 px-4 py-2">{req.productType}</td>
+                            <td className="border border-gray-300 px-4 py-2">{new Date(req.requestDate).toLocaleDateString()}</td>
+                            <td
+                                className={`border border-gray-300 px-4 py-2 font-bold ${req.requestStatus === "Rejected" ? "text-red-600" : "text-green-600"
+                                    }`}
+                            >
+                                {req.requestStatus === "Rejected" ? "Rejected" : req.requestStatus === "Approved" ? "Approved" : "Pending"}
+                            </td>
+                            <td className="border border-gray-300 px-4 py-2 flex gap-2">
                                 {req.requestStatus === 'Pending' && (
                                     <>
                                         <button

@@ -44,13 +44,9 @@ const SignUpHr = () => {
                 currentEmployees: parseInt(0),
                 subscription: 'basic',
             });
-
-
-
             navigate(from, { replace: true });
             toast.success('HR Account Created Successfully');
             console.log(data);
-
         } catch (err) {
             console.error(err);
             toast.error(err.message);
@@ -66,14 +62,14 @@ const SignUpHr = () => {
             {/* Header - Kept from HTML but adapted */}
             <header className="sticky top-0 z-50 flex items-center bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm p-4 justify-between border-b border-border-light dark:border-border-dark">
                 <div className="flex items-center gap-3">
-                    <button onClick={() => navigate(-1)} className="flex items-center justify-center rounded-full w-8 h-8 text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-300 cursor-pointer transition-colors">
+                    <button onClick={() => navigate('/')} className="flex items-center justify-center rounded-full w-8 h-8 text-text-light dark:text-text-dark hover:bg-gray-200 dark:hover:bg-gray-300 cursor-pointer transition-colors">
                         <span className="material-symbols-outlined text-2xl">arrow_back</span>
                     </button>
                     <h1 className="text-primary text-xl font-bold leading-tight tracking-[-0.015em]">Create Account</h1>
                 </div>
             </header>
 
-            <main className="flex-grow p-4 md:p-6 flex flex-col items-center justify-center">
+            <main className="grow p-4 md:p-6 flex flex-col items-center justify-center">
                 <div className="w-full max-w-md space-y-8">
                     <div className="text-center pt-4">
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">

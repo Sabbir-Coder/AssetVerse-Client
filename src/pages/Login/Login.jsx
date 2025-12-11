@@ -6,13 +6,12 @@ import { FcGoogle } from 'react-icons/fc'
 import { TbFidgetSpinner } from 'react-icons/tb'
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa6'
 import { useState } from 'react'
-import { IoIosArrowRoundBack } from 'react-icons/io'
 import SmallLoader from '../../components/Shared/SmallLoader'
 
 
 
 const Login = () => {
-  const { signIn, signInWithGoogle, loading, user, setLoading } = useAuth()
+  const { signIn, loading, user, setLoading } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const [showPassword, setShowPassword] = useState(true)
@@ -42,19 +41,7 @@ const Login = () => {
     }
   }
 
-  // Handle Google Signin
-  const handleGoogleSignIn = async () => {
-    try {
-      //User Registration using google
-      await signInWithGoogle()
-      navigate(from, { replace: true })
-      toast.success('Login Successful')
-    } catch (err) {
-      console.log(err)
-      setLoading(false)
-      toast.error(err?.message)
-    }
-  }
+
   return (
     <div className='flex justify-center items-start min-h-screen bg-white'>
 
@@ -132,18 +119,11 @@ const Login = () => {
         <div className='flex items-center pt-4 space-x-1'>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
           <p className='px-3 text-sm dark:text-gray-400'>
-            Login with social accounts
+            or
           </p>
           <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
         </div>
-        {/* <div
-          onClick={handleGoogleSignIn}
-          className='flex justify-center items-center space-x-2 border m-3 p-2 border-gray-300 border-rounded cursor-pointer'
-        >
-          <FcGoogle size={32} />
 
-          <p>Continue with Google</p>
-        </div> */}
         <p className='px-6 text-sm text-center text-gray-400'>
           Don&apos;t have an account yet?{' '}
           <Link
@@ -151,7 +131,21 @@ const Login = () => {
             to='/join-employee'
             className='hover:underline hover:text-blue-500 text-blue-600 font-bold'
           >
-            Sign up
+            Sign up as Employee
+          </Link>
+          <div className='flex items-center pt-4 space-x-1'>
+            <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
+            <p className='px-3 text-sm dark:text-gray-400'>
+              or
+            </p>
+            <div className='flex-1 h-px sm:w-16 dark:bg-gray-700'></div>
+          </div>
+          <Link
+            state={from}
+            to='/join-hr'
+            className='hover:underline hover:text-blue-500 text-blue-600 font-bold'
+          >
+            Sign up as HR
           </Link>
           .
         </p>
