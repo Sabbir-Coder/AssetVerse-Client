@@ -29,7 +29,7 @@ const AllRequests = () => {
             toast.success('Request approved');
             refetch();
         },
-        onError: () => toast.error('Error approving request')
+        onError: () => toast.error('Error approving request. The asset is not available.')
     });
 
     // Reject mutation

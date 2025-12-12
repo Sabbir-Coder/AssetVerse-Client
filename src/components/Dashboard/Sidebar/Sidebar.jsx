@@ -9,14 +9,18 @@ import { GrLogout } from 'react-icons/gr'
 import { FcSettings } from 'react-icons/fc'
 import { AiOutlineBars } from 'react-icons/ai'
 import { AiOutlineClose } from 'react-icons/ai'
+import { MdDashboard } from "react-icons/md";
+
 
 // User Menu
 import MenuItem from './Menu/MenuItem'
 import EmployeeMenu from './Menu/EmployeeMenu'
 import HrMenu from './Menu/HrMenu'
 import useRole from '../../../hooks/useRole'
+import Dashboard from '../../../pages/Dashboard/Common/Dashboard'
+import { GiBassetHoundHead } from 'react-icons/gi'
 
-const Sidebar = () => {
+const Sidebar = ({ onItemClick }) => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
   const { role, isRoleLoading } = useRole()
@@ -24,7 +28,7 @@ const Sidebar = () => {
   const handleToggle = () => setActive(!isActive)
   const closeSidebar = () => setActive(false)
 
-  if(isRoleLoading) return <LoadingSpinner />
+  if (isRoleLoading) return <LoadingSpinner />
 
   return (
     <>
@@ -79,6 +83,7 @@ const Sidebar = () => {
           {/* Middle Content */}
           <div className="flex-1 overflow-y-auto mt-4">
             <nav>
+              <MenuItem onClick={onItemClick} icon={MdDashboard} label='Dashboard' address='/dashboard' />
               {role === 'employee' && <EmployeeMenu />}
               {role === 'hr' && <HrMenu />}
             </nav>
@@ -86,7 +91,7 @@ const Sidebar = () => {
 
           {/* Bottom Content */}
           <div>
-            <hr />
+            <hr className='text-gray-300' />
 
             <MenuItem
               icon={FcSettings}

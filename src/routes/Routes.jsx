@@ -18,6 +18,7 @@ import RequestAsset from '../pages/Dashboard/Employee/RequestAsset'
 import MyTeam from '../pages/Dashboard/Employee/MyTeam'
 import UpgradePackage from '../pages/Dashboard/HrPages/UpgradePackage'
 import UpdateAsset from '../pages/Dashboard/HrPages/UpdateAsset'
+import Dashboard from '../pages/Dashboard/Common/Dashboard'
 
 
 
@@ -45,6 +46,14 @@ export const router = createBrowserRouter([
     ),
     children: [
       // HR Routes Here
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <Dashboard />
+          </PrivateRoute>
+        ),
+      },
       {
         path: 'asset-list',
         element: (

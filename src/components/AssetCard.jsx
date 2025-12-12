@@ -53,7 +53,7 @@ const AssetCard = ({ asset }) => {
   };
 
   return (
-    <div className="card  max-h-110 bg-white shadow-sm">
+    <div className="card h-110 bg-white shadow-sm">
       <figure className='p-4 bg-gray-300'>
         <img className='w-full'
           src={image}
