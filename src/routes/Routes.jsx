@@ -11,7 +11,6 @@ import SignUpEmployee from '../pages/SignUp/SignUpEmployee'
 import AssetList from '../pages/Dashboard/HrPages/AssetList'
 import AddAsset from '../pages/Dashboard/HrPages/AddAsset'
 import AllRequests from '../pages/Dashboard/HrPages/AllRequests'
-
 import MyEmployeeList from '../pages/Dashboard/HrPages/MyEmployeeList'
 import MyAssets from '../pages/Dashboard/Employee/MyAsset'
 import RequestAsset from '../pages/Dashboard/Employee/RequestAsset'
@@ -19,7 +18,9 @@ import MyTeam from '../pages/Dashboard/Employee/MyTeam'
 import UpgradePackage from '../pages/Dashboard/HrPages/UpgradePackage'
 import UpdateAsset from '../pages/Dashboard/HrPages/UpdateAsset'
 import Dashboard from '../pages/Dashboard/Common/Dashboard'
-import Payment from '../pages/Dashboard/HrPages/Payment'
+import PaymentSuccess from '../pages/Dashboard/HrPages/PaymentSuccess'
+import PaymentCancel from '../pages/Dashboard/HrPages/PaymentCancel'
+
 
 
 
@@ -104,10 +105,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: 'payment/:packageId',
+        path: 'payment-success',
         element: (
           <PrivateRoute>
-            <Payment />
+            <PaymentSuccess />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'payment-cancelled',
+        element: (
+          <PrivateRoute>
+            <PaymentCancel />
           </PrivateRoute>
         ),
       },

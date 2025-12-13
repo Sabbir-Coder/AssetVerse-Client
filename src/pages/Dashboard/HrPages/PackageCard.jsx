@@ -1,11 +1,26 @@
 import React from 'react';
 import { FaCheckCircle, FaTimes } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa6";
-import { Link } from 'react-router';
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import useAuth from "../../../hooks/useAuth";
+import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 
 const PackageCard = ({ plan }) => {
-    console.log(plan);
-    const { price, name, features,_id } = plan
+    const axiosSecure = useAxiosSecure()
+    const { user, loading } = useAuth()
+    const { price, name, features, _id } = plan
+
+    const handlePayment = async (plan) => {
+        const paymentInfo = {
+            price: plan.price,
+            name: plan.name,
+            packageId: plan._id,
+            customer_email: user.email,
+        }
+        const res = await axiosSecure.post('/create-checkout-session', paymentInfo)
+        window.location.href = res.data.url;
+    }
+
+    if (loading) return <LoadingSpinner />
 
     return (
         <div className="relative flex flex-col rounded-3xl p-6 shadow-2xl shadow-gray-900/20  overflow-hidden transform scale-105 md:scale-100 md:hover:scale-105 transition-transform duration-300 border border-gray-800">
@@ -35,13 +50,13 @@ const PackageCard = ({ plan }) => {
                 ))}
 
             </ul>
-            <Link to={`/dashboard/payment/${_id}`}
+            <button onClick={() => handlePayment(plan)}
                 className={`w-full py-4 text-center rounded-2xl text-white font-bold transition-colors relative z-10
     ${name === "Free" ? "bg-gray-500 cursor-not-allowed pointer-events-none" : "bg-[#040c50]  cursor-pointer  hover:bg-[#403e86]"}`}
                 disabled={name === "Free"}
             >
                 Purchase {name} Plan
-            </Link>
+            </button>
         </div>
     );
 };
