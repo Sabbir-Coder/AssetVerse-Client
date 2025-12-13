@@ -50,7 +50,7 @@ const Navbar = () => {
 
               {user && (
                 <Link
-                  to='/dashboard'
+                  to='/dashboard/profile'
                   className='text-gray-700 hover:text-primary font-medium transition'
                 >
                   Dashboard
@@ -122,7 +122,7 @@ const Navbar = () => {
                       {user ? (
                         <>
                           <Link
-                            to='/dashboard'
+                            to='/dashboard/profile'
                             onClick={() => setIsOpen(false)}
                             className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
                           >

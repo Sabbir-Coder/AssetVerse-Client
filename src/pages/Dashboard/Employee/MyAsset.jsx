@@ -58,7 +58,9 @@ const MyAsset = () => {
 
     return (
         <div className="overflow-x-auto p-4">
-            <h2 className="text-2xl font-bold mb-6 text-gray-600 ">All Requested Assets</h2>
+            <h2 className='text-3xl font-bold text-gray-600 my-5'>All Requested Assets</h2>
+            <p className='text-gray-500 mb-10'>All your requested assets and their status.
+            </p>
             <table className="table-auto border-collapse border-gray-300 border w-full">
                 <thead>
                     <tr>

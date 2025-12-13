@@ -11,7 +11,7 @@ const UpgradePackage = () => {
     const axiosSecure = useAxiosSecure()
 
     const { isLoading, data: upgradePackages = [] } = useQuery({
-        queryKey: ['packages', user.email],
+        queryKey: ['packages'],
         queryFn: async () => {
             const res = await axiosSecure.get(`/packages`)
             return res.data

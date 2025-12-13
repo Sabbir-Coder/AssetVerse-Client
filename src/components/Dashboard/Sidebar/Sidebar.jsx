@@ -9,7 +9,6 @@ import { GrLogout } from 'react-icons/gr'
 import { FcSettings } from 'react-icons/fc'
 import { AiOutlineBars } from 'react-icons/ai'
 import { AiOutlineClose } from 'react-icons/ai'
-import { MdDashboard } from "react-icons/md";
 
 
 // User Menu
@@ -17,10 +16,8 @@ import MenuItem from './Menu/MenuItem'
 import EmployeeMenu from './Menu/EmployeeMenu'
 import HrMenu from './Menu/HrMenu'
 import useRole from '../../../hooks/useRole'
-import Dashboard from '../../../pages/Dashboard/Common/Dashboard'
-import { GiBassetHoundHead } from 'react-icons/gi'
 
-const Sidebar = ({ onItemClick }) => {
+const Sidebar = () => {
   const { logOut } = useAuth()
   const [isActive, setActive] = useState(false)
   const { role, isRoleLoading } = useRole()
@@ -82,8 +79,7 @@ const Sidebar = ({ onItemClick }) => {
 
           {/* Middle Content */}
           <div className="flex-1 overflow-y-auto mt-4">
-            <nav>
-              <MenuItem onClick={onItemClick} icon={MdDashboard} label='Dashboard' address='/dashboard' />
+            <nav>     
               {role === 'employee' && <EmployeeMenu />}
               {role === 'hr' && <HrMenu />}
             </nav>

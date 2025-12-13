@@ -9,6 +9,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
+import UpgradePackage from '../Dashboard/HrPages/UpgradePackage';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -429,71 +430,12 @@ const Home = () => {
       </div>
 
       {/* Packages Section */}
-      <div className="px-4 py-10" ref={pricingSectionRef}>
-        <h2 className="text-primary-corporate text-2xl md:text-3xl font-bold leading-tight tracking-tight pb-8 text-center">
-          Flexible Plans for Teams of All Sizes
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {pricingPlans.map((plan, index) => (
-            <div
-              key={index}
-              ref={addToPricingRefs}
-              className={`flex flex-col gap-4 rounded-2xl p-6 relative transition-all duration-300 hover:shadow-xl transform hover:-translate-y-2 ${plan.popular
-                  ? 'border-2 border-secondary-corporate bg-white  shadow-lg'
-                  : 'border border-gray-200 bg-white'
-                }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-secondary-corporate to-emerald-500 text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-md">
-                  MOST POPULAR
-                </div>
-              )}
-              <div className="flex flex-col gap-2">
-                <h3 className="text-primary-corporate text-xl font-bold">
-                  {plan.name}
-                </h3>
-                <p className="text-text-muted-light text-sm">
-                  {plan.description}
-                </p>
-                <p className="text-primary-corporate text-4xl font-extrabold mt-3">
-                  {plan.price}
-                  {plan.price !== "Contact Us" && (
-                    <span className="text-base font-normal text-text-muted-light">
-                      /mo
-                    </span>
-                  )}
-                </p>
-                <p className="text-text-muted-light text-sm">
-                  {plan.employees}
-                </p>
-              </div>
-              <ul className="flex flex-col gap-3 text-text-light mt-2">
-                {plan.features.map((feature, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-secondary-corporate text-xl">
-                      check_circle
-                    </span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <button
-                className={`w-full mt-4 flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-12 px-5 text-base font-bold leading-normal tracking-wide transition-all duration-300 ${plan.popular
-                    ? 'bg-gradient-to-r from-secondary-corporate to-emerald-500 text-white hover:shadow-lg'
-                    : 'bg-secondary-corporate/15 text-secondary-corporate hover:bg-secondary-corporate/25'
-                  }`}
-              >
-                {plan.buttonText}
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
+      <UpgradePackage />
 
       {/* Testimonial Section with Swiper */}
       <div
         ref={testimonialRef}
-        className="px-4 py-12 bg-gradient-to-br from-primary-corporate/5 to-secondary-corporate/5"
+        className="px-4 py-12 bg-linear-to-br from-primary-corporate/5 to-secondary-corporate/5"
       >
         <div className="max-w-3xl mx-auto">
           <Swiper

@@ -2,7 +2,7 @@ import { Pie, PieChart, Tooltip, Legend, Cell } from 'recharts';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
-import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
+import SmallLoader from '../../../components/Shared/SmallLoader';
 
 export default function TwoLevelPieChart() {
     const { user } = useAuth();
@@ -31,10 +31,10 @@ export default function TwoLevelPieChart() {
         { name: 'Returnable', value: returnableCount },
         { name: 'Non-Returnable', value: nonReturnableCount },
     ];
-    if (isLoading) return <LoadingSpinner />;
+    if (isLoading) return <SmallLoader />;
 
     return (
-        <PieChart width={400} height={400}>
+        <PieChart width={'100%'} height={400}>
 
             <Pie
                 data={pieData}
