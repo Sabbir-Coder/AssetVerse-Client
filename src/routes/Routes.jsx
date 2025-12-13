@@ -19,6 +19,7 @@ import MyTeam from '../pages/Dashboard/Employee/MyTeam'
 import UpgradePackage from '../pages/Dashboard/HrPages/UpgradePackage'
 import UpdateAsset from '../pages/Dashboard/HrPages/UpdateAsset'
 import Dashboard from '../pages/Dashboard/Common/Dashboard'
+import Payment from '../pages/Dashboard/HrPages/Payment'
 
 
 
@@ -99,6 +100,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <UpgradePackage />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'payment/:packageId',
+        element: (
+          <PrivateRoute>
+            <Payment />
           </PrivateRoute>
         ),
       },
