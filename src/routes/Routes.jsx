@@ -20,6 +20,7 @@ import UpdateAsset from '../pages/Dashboard/HrPages/UpdateAsset'
 import Dashboard from '../pages/Dashboard/Common/Dashboard'
 import PaymentSuccess from '../pages/Dashboard/HrPages/PaymentSuccess'
 import PaymentCancel from '../pages/Dashboard/HrPages/PaymentCancel'
+import LoadingSpinner from '../components/Shared/LoadingSpinner'
 
 
 
@@ -28,6 +29,7 @@ export const router = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
+    hydrateFallbackElement: <LoadingSpinner />,
     errorElement: <ErrorPage />,
     children: [
       {

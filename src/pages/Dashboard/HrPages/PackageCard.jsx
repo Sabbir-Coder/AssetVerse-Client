@@ -7,7 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const PackageCard = ({ plan }) => {
     const axiosSecure = useAxiosSecure();
-    const { user,loading } = useAuth();
+    const { user, loading } = useAuth();
     const { price, name, features, _id } = plan;
 
     const { data: userData } = useQuery({
@@ -43,9 +43,23 @@ const PackageCard = ({ plan }) => {
     };
 
     if (loading) return <LoadingSpinner />;
+    // Determine which buttons should be disabled
+    const isPremiumPurchased = userData?.package === "Premium";
+    const isStandardPurchased = userData?.package === "Standard";
 
-    // Check if the user has already purchased this plan
-    const isPurchased = userData?.package === name;
+    const isDisabled =
+        name === "Free" || // Free plan is always disabled
+        isPremiumPurchased && (name === "Premium" || name === "Standard") || // Disable Premium & Standard if Premium purchased
+        isStandardPurchased && name === "Standard"; // Optional: disable Standard if Standard purchased
+// Determine button text
+const buttonText = (() => {
+    if (isPremiumPurchased && (name === "Premium" || name === "Standard")) return "Purchased";
+    if (isStandardPurchased && name === "Standard") return "Purchased";
+    if (name === "Free") return "Free";
+    return `Purchase ${name} Plan`;
+})();
+
+
 
     return (
         <div className="relative flex flex-col rounded-3xl p-6 shadow-2xl shadow-gray-900/20 overflow-hidden transform scale-105 md:scale-100 md:hover:scale-105 transition-transform duration-300 border border-gray-800">
@@ -73,17 +87,19 @@ const PackageCard = ({ plan }) => {
                     </li>
                 ))}
             </ul>
-            <button
-                onClick={() => handlePayment(plan)}
-                className={`w-full py-4 text-center rounded-2xl text-white font-bold transition-colors relative z-10
-                    ${name === "Free" || isPurchased
-                        ? "bg-gray-500 cursor-not-allowed pointer-events-none"
-                        : "bg-[#040c50] cursor-pointer hover:bg-[#403e86]"}`
-                }
-                disabled={name === "Free" || isPurchased}
-            >
-                {isPurchased ? "Purchased" : `Purchase ${name} Plan`}
-            </button>
+  <button
+    onClick={() => handlePayment(plan)}
+    className={`w-full py-4 text-center rounded-2xl text-white font-bold transition-colors relative z-10
+        ${isDisabled
+            ? "bg-gray-500 cursor-not-allowed pointer-events-none"
+            : "bg-[#040c50] cursor-pointer hover:bg-[#403e86]"
+        }`}
+    disabled={isDisabled}
+>
+    {buttonText}
+</button>
+
+
         </div>
     );
 };

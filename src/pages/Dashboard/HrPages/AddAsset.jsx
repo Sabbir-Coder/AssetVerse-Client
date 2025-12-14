@@ -10,7 +10,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const AddAsset = () => {
     // UserQueryComponent.jsx
-    const { user, loading } = useAuth();
+    const { user } = useAuth();
     const axiosSecure = useAxiosSecure();
 
     const { data: userData } = useQuery({
