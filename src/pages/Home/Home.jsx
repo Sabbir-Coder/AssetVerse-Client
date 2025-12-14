@@ -10,6 +10,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import UpgradePackage from '../Dashboard/HrPages/UpgradePackage';
+import Banner from './Banner';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -68,36 +69,7 @@ const Home = () => {
     }
   ];
 
-  // Pricing plans data
-  const pricingPlans = [
-    {
-      name: "Basic",
-      description: "For small teams getting started.",
-      price: "$99",
-      employees: "Up to 50 Employees",
-      features: ["Real-time Tracking", "Basic Reporting"],
-      popular: false,
-      buttonText: "Choose Plan"
-    },
-    {
-      name: "Standard",
-      description: "For growing businesses that need more power.",
-      price: "$249",
-      employees: "Up to 250 Employees",
-      features: ["All Basic Features", "Custom Reporting", "API Access"],
-      popular: true,
-      buttonText: "Choose Plan"
-    },
-    {
-      name: "Premium",
-      description: "For large organizations with advanced needs.",
-      price: "Contact Us",
-      employees: "250+ Employees",
-      features: ["All Standard Features", "Dedicated Support", "Advanced Security"],
-      popular: false,
-      buttonText: "Contact Sales"
-    }
-  ];
+
 
   // Steps data
   const steps = [
@@ -134,210 +106,14 @@ const Home = () => {
     }
   ];
 
-  useEffect(() => {
-    // Hero section animation
-    const heroTl = gsap.timeline();
-    heroTl
-      .fromTo(
-        heroRef.current,
-        { opacity: 0, scale: 1.1 },
-        { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" }
-      )
-      .fromTo(
-        heroTextRef.current?.children,
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.8, stagger: 0.2, ease: "power3.out" },
-        "-=0.6"
-      )
-      .fromTo(
-        heroButtonRef.current,
-        { opacity: 0, y: 30, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.7)" },
-        "-=0.4"
-      );
 
-    // About section title animation
-    gsap.fromTo(
-      aboutSectionRef.current,
-      { opacity: 0, x: -50 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: aboutSectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
 
-    // Feature cards stagger animation
-    gsap.fromTo(
-      featureCardsRef.current,
-      { opacity: 0, y: 60, rotateX: -15 },
-      {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.7,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: featureCardsRef.current[0],
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
+   
 
-    // Pricing section animation
-    gsap.fromTo(
-      pricingSectionRef.current,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: pricingSectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
 
-    // Pricing cards animation with scale effect
-    gsap.fromTo(
-      pricingCardsRef.current,
-      { opacity: 0, y: 80, scale: 0.9 },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: 0.8,
-        stagger: 0.2,
-        ease: "back.out(1.4)",
-        scrollTrigger: {
-          trigger: pricingCardsRef.current[0],
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
 
-    // Testimonial section animation
-    gsap.fromTo(
-      testimonialRef.current,
-      { opacity: 0, scale: 0.95 },
-      {
-        opacity: 1,
-        scale: 1,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: testimonialRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
+  
 
-    // Steps section animation
-    gsap.fromTo(
-      stepsSectionRef.current?.querySelector('h2'),
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: stepsSectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // Steps stagger animation with slide in
-    gsap.fromTo(
-      stepsRef.current,
-      { opacity: 0, x: -60 },
-      {
-        opacity: 1,
-        x: 0,
-        duration: 0.7,
-        stagger: 0.25,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: stepsRef.current[0],
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // FAQ section animation
-    gsap.fromTo(
-      faqSectionRef.current?.querySelector('h2'),
-      { opacity: 0, y: 30 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: faqSectionRef.current,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // FAQ items animation
-    gsap.fromTo(
-      faqItemsRef.current,
-      { opacity: 0, y: 40, rotateX: -10 },
-      {
-        opacity: 1,
-        y: 0,
-        rotateX: 0,
-        duration: 0.6,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: faqItemsRef.current[0],
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // CTA section animation
-    gsap.fromTo(
-      ctaSectionRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: ctaSectionRef.current,
-          start: "top 85%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // Cleanup
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
 
   // Helper function to add refs to arrays
   const addToFeatureRefs = (el) => {
@@ -367,26 +143,7 @@ const Home = () => {
   return (
     <div className="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
       {/* Hero Section with Background Image */}
-      <div className="@container">
-        <div className="@[480px]:px-4 @[480px]:py-3">
-          <div
-            ref={heroRef}
-            className="bg-cover bg-center flex flex-col justify-end overflow-hidden bg-background-light dark:bg-background-dark @[480px]:rounded-xl min-h-[400px] md:min-h-[500px] relative"
-            style={{
-              backgroundImage: `linear-gradient(0deg, rgba(10, 37, 64, 0.8) 0%, rgba(10, 37, 64, 0.2) 60%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuBVGD4FoaeZpuVXRISr1qSt-OWIZeFTSQ7r4P21ib9M9AwQs8LMI0xFVv2TzJ2tkkeuhNZJWrk3nsl-hns2XV7ociybS_kWWcOdkKdXraG3R9x3wbHPohpSDZu2JlLRKsiBH-4uWiuUG8VCik7BpyLzrSkoPXMiVZzlnu-og8SkP3NjOSVJn8oAO7wyrMh2dnv3gnlh-8Qv48HchM5tSMCf3aKWAOmkvl5cCx18L_qXzgjM7W-ejNLCe3YDpmlm8Lnn1tc4NcR-bA")`
-            }}
-          >
-            <div ref={heroTextRef} className="flex flex-col p-6 md:p-10 gap-4">
-              <h1 className="text-white tracking-tight text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-                Simplify Your Corporate Asset Management
-              </h1>
-              <p className="text-gray-200 text-base md:text-lg leading-normal max-w-2xl">
-                Gain full control and visibility over your company's valuable assets, from acquisition to disposal.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+   <Banner/>
 
       {/* CTA Button */}
       <div className="flex px-4 py-3 justify-center -mt-10 md:-mt-12 z-10">

@@ -7,24 +7,13 @@ import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 const MyEmployeeList = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
-    const { data: employees, isLoading, isError, refetch } = useQuery({
+    const { data: employees=[], isLoading, isError, } = useQuery({
         queryKey: ['employees', user?.email],
         queryFn: async () => {
             const response = await axiosSecure.get(`/hr/employee-assets?hrEmail=${user?.email}`);
             return response.data;
         }
     })
-    // const { data: assignedUsers, } = useQuery({
-    //     queryKey: ['assignedUsers', user?.email],
-    //     queryFn: async () => {
-    //         const response = await axiosSecure.get(`/hr/employee-assets?hrEmail=${user?.email}`);
-    //         return response.data;
-    //     }
-    // })
-
-
-
-
 
 
     console.log(employees);
@@ -63,7 +52,7 @@ const MyEmployeeList = () => {
                                     <div className="flex items-center gap-3">
                                         <div className="avatar">
                                             <div className="mask mask-squircle h-12 w-12">
-                                                <img src={employee.photoURL} alt={employee.employeeName} />
+                                                <img src={employee.employeePhoto} alt={employee.employeeName} />
                                             </div>
                                         </div>
                                     </div>

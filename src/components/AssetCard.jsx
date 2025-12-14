@@ -6,8 +6,8 @@ import useAxiosSecure from '../hooks/useAxiosSecure';
 const AssetCard = ({ asset }) => {
   const { user } = useAuth()
   const axiosSecure = useAxiosSecure();
-  console.log(asset);
   const { productName, description, productType, quantity, image } = asset;
+console.log(user);
 
 
   const handleRequest = async (asset) => {
@@ -19,6 +19,7 @@ const AssetCard = ({ asset }) => {
         productType,
         requesterName: user.displayName,
         requesterEmail: user.email,
+        requesterPhoto: user.photoURL,
         HrEmail: hr.email,
         companyName,
         requestDate: new Date(),

@@ -25,7 +25,7 @@ const Navbar = () => {
   }, [])
 
   return (
-    <div className={`fixed w-full bg-white z-10 shadow-sm transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
+    <div className={`fixed w-full bg-white z-999 shadow-sm transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
       <div className={`transition-all duration-300 ${isScrolled ? 'py-1.5' : 'py-2'}`}>
         <Container>
           <div className='flex flex-row items-center justify-between gap-3 md:gap-8'>

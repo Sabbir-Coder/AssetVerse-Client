@@ -5,24 +5,27 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import PackageCard from "./PackageCard";
 import LoadingSpinner from "../../../components/Shared/LoadingSpinner";
+import PaymentHistory from "./PaymentHistory";
 
 const UpgradePackage = () => {
     const { user } = useAuth()
     const axiosSecure = useAxiosSecure()
 
     const { isLoading, data: upgradePackages = [] } = useQuery({
-        queryKey: ['packages'],
+        queryKey: ["packages"],
+        enabled: !!user?.email, // ⬅️ IMPORTANT
         queryFn: async () => {
-            const res = await axiosSecure.get(`/packages`)
-            return res.data
-        }
-    })
-    console.log(upgradePackages);
+            const res = await axiosSecure.get("/packages");
+            return res.data;
+        },
+    });
+
     if (isLoading) return <LoadingSpinner />
 
     return (
         <div className="bg-background-light dark:bg-background-dark font-body min-h-screen transition-colors duration-300">
             {/* Header & Toggle */}
+            <PaymentHistory />
             <div className="flex mb-20 flex-col items-center justify-center space-y-6 pt-4">
                 <h1 className="text-4xl font-display font-medium text-gray-900">
                     Pricing
