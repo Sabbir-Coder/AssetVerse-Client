@@ -61,7 +61,7 @@ const AddAsset = () => {
     const onsubmit = async (data) => {
         const { productName, productType, description, quantity, image } = data;
         const imageFile = image[0];
-        console.log(data);
+
 
         try {
             const imageURL = await imageUpload(imageFile);

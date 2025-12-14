@@ -6,7 +6,7 @@ import LoadingSpinner from '../../Shared/LoadingSpinner'
 
 // Icons
 import { GrLogout } from 'react-icons/gr'
-import { FcSettings } from 'react-icons/fc'
+import { CgProfile } from "react-icons/cg";
 import { AiOutlineBars } from 'react-icons/ai'
 import { AiOutlineClose } from 'react-icons/ai'
 
@@ -30,7 +30,7 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Toggle Button */}
-      <div className="md:hidden flex justify-between items-center z-20 px-4 py-3  bg-white shadow">
+      <div className="md:hidden sticky top-0 flex justify-between items-center z-20 px-4 py-3  bg-white shadow">
         <button
           onClick={handleToggle}
           className="p-2 rounded focus:outline-none focus:bg-gray-200"
@@ -52,13 +52,13 @@ const Sidebar = () => {
       {/* Sidebar */}
       <div
         className={`
-          fixed top-0 inset-y-0 left-0 z-20 max-h-[800px] w-59 bg-white shadow-xl
-          transform transition-transform duration-200 ease-in-out
-          ${isActive ? "translate-x-0" : "-translate-x-full"}
-          md:translate-x-0 md:static
-        `}
+    fixed top-0 inset-y-0 left-0 z-20 max-h-screen w-52 bg-white shadow-xl
+    transform transition-transform duration-200 ease-in-out
+    ${isActive ? "translate-x-0" : "-translate-x-full"}
+    md:translate-x-0 md:sticky md:top-0
+  `}
       >
-        <div className="flex flex-col justify-between h-full px-2 py-4">
+        <div className="flex flex-col justify-between h-full  py-4">
 
           {/* Top Row (Logo + Close Button for mobile) */}
           <div className="flex items-center justify-between px-3">
@@ -78,8 +78,8 @@ const Sidebar = () => {
           </div>
 
           {/* Middle Content */}
-          <div className="flex-1 overflow-y-auto mt-4">
-            <nav>     
+          <div className="flex-1 overflow-y-auto ">
+            <nav>
               {role === 'employee' && <EmployeeMenu />}
               {role === 'hr' && <HrMenu />}
             </nav>
@@ -90,7 +90,7 @@ const Sidebar = () => {
             <hr className='text-gray-300' />
 
             <MenuItem
-              icon={FcSettings}
+              icon={CgProfile}
               label="Profile"
               address="/dashboard/profile"
               onClick={closeSidebar}
