@@ -21,16 +21,21 @@ const AllRequests = () => {
     });
 
     // Approve mutation
-    const approveMutation = useMutation({
-        mutationFn: async (requestId) => {
-            return axiosSecure.patch(`/asset-requests/${requestId}/approve`);
-        },
-        onSuccess: () => {
-            toast.success('Request approved');
-            refetch();
-        },
-        onError: () => toast.error('Error approving request. The asset is not available.')
-    });
+  const approveMutation = useMutation({
+  mutationFn: async (requestId) => {
+    return axiosSecure.patch(`/asset-requests/${requestId}/approve`);
+  },
+  onSuccess: () => {
+    toast.success('Request approved');
+    refetch();
+  },
+  onError: (error) => {
+    const message =
+      error?.response?.data?.message || 'Failed to approve request';
+    toast.error(message);
+  },
+});
+
 
     // Reject mutation
     const rejectMutation = useMutation({
