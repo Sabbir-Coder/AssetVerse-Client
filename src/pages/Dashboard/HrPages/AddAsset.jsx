@@ -2,7 +2,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { imageUpload } from '../../../utils';
 import useAuth from '../../../hooks/useAuth';
-import axios from 'axios';
 import { useMutation, useQuery, } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import SmallLoader from '../../../components/Shared/SmallLoader';
@@ -24,31 +23,32 @@ const AddAsset = () => {
 
     const companyName = userData?.companyName;
 
-    const { isPending, isError, mutateAsync, reset: mutationReset } = useMutation({
-        mutationFn: async (data) => {
-            await axios.post(`${import.meta.env.VITE_API_URL}/assets`, data);
-        },
-        onSuccess: () => {
-            console.log('Product added successfully');
-            toast.success('Product added successfully');
-            mutationReset();
-        },
-        onError: (error) => {
-            console.error('Error adding product:', error);
-            toast.error('Error adding product');
-        },
-        onMutate: () => {
-            console.log('Adding product...');
-        },
-        onSettled: (data, error) => {
-            if (data) {
-                console.log('Product addition process settled with data:', data);
-            }
-            if (error) {
-                console.error('Product addition process settled with error:', error);
-            }
+  const { isPending, isError, mutateAsync, reset: mutationReset } = useMutation({
+    mutationFn: async (data) => {
+        await axiosSecure.post(`/assets`, data); // <-- use axiosSecure here
+    },
+    onSuccess: () => {
+        console.log('Product added successfully');
+        toast.success('Product added successfully');
+        mutationReset();
+    },
+    onError: (error) => {
+        console.error('Error adding product:', error);
+        toast.error('Error adding product');
+    },
+    onMutate: () => {
+        console.log('Adding product...');
+    },
+    onSettled: (data, error) => {
+        if (data) {
+            console.log('Product addition process settled with data:', data);
         }
-    });
+        if (error) {
+            console.error('Product addition process settled with error:', error);
+        }
+    }
+});
+
 
     // react hook form
     const {

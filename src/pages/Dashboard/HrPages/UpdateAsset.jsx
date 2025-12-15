@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import React, { useEffect } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import { useForm } from 'react-hook-form';
@@ -7,10 +6,12 @@ import toast from 'react-hot-toast';
 import { useNavigate, useParams } from 'react-router';
 import LoadingSpinner from '../../../components/Shared/LoadingSpinner';
 import SmallLoader from '../../../components/Shared/SmallLoader';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
 
 const UpdateAsset = () => {
     const { id } = useParams();
     const assetId = id;
+    const axiosSecure=useAxiosSecure()
     const navigate = useNavigate();
     const { user } = useAuth();
     console.log(assetId);
@@ -26,7 +27,7 @@ const UpdateAsset = () => {
     const { data: assetData, isLoading } = useQuery({
         queryKey: ["asset", assetId],
         queryFn: async () => {
-            const res = await axios.get(`${import.meta.env.VITE_API_URL}/assets/${assetId}`);
+            const res = await axiosSecure.get(`${import.meta.env.VITE_API_URL}/assets/${assetId}`);
             return res.data;
         }
     });
@@ -47,7 +48,7 @@ const UpdateAsset = () => {
     // 2. Update asset mutation
     const { mutateAsync, isPending } = useMutation({
         mutationFn: async (data) => {
-            return await axios.put(
+            return await axiosSecure.put(
                 `${import.meta.env.VITE_API_URL}/assets/${assetId}`,
                 data
             );

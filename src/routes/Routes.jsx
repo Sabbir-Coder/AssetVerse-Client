@@ -21,6 +21,7 @@ import Dashboard from '../pages/Dashboard/Common/Dashboard'
 import PaymentSuccess from '../pages/Dashboard/HrPages/PaymentSuccess'
 import PaymentCancel from '../pages/Dashboard/HrPages/PaymentCancel'
 import LoadingSpinner from '../components/Shared/LoadingSpinner'
+import HrRoutes from './HrRoutes'
 
 
 
@@ -54,7 +55,9 @@ export const router = createBrowserRouter([
         index: true,
         element: (
           <PrivateRoute>
-            <Dashboard />
+            <HrRoutes>
+              <Dashboard />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -62,7 +65,9 @@ export const router = createBrowserRouter([
         path: 'asset-list',
         element: (
           <PrivateRoute>
-            <AssetList />
+            <HrRoutes>
+              <AssetList />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -70,7 +75,9 @@ export const router = createBrowserRouter([
         path: 'assets/edit/:id',
         element: (
           <PrivateRoute>
-            <UpdateAsset />
+            <HrRoutes>
+              <UpdateAsset />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -78,7 +85,9 @@ export const router = createBrowserRouter([
         path: 'add-asset',
         element: (
           <PrivateRoute>
-            <AddAsset />
+            <HrRoutes>
+              <AddAsset />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -86,7 +95,9 @@ export const router = createBrowserRouter([
         path: 'all-requests',
         element: (
           <PrivateRoute>
-            <AllRequests />
+            <HrRoutes>
+              <AllRequests />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -94,7 +105,9 @@ export const router = createBrowserRouter([
         path: 'my-employee-list',
         element: (
           <PrivateRoute>
-            <MyEmployeeList />
+            <HrRoutes>
+              <MyEmployeeList />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -102,7 +115,9 @@ export const router = createBrowserRouter([
         path: 'upgrade-package',
         element: (
           <PrivateRoute>
-            <UpgradePackage />
+            <HrRoutes>
+              <UpgradePackage />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -110,7 +125,9 @@ export const router = createBrowserRouter([
         path: 'payment-success',
         element: (
           <PrivateRoute>
-            <PaymentSuccess />
+            <HrRoutes>
+              <PaymentSuccess />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },
@@ -118,7 +135,9 @@ export const router = createBrowserRouter([
         path: 'payment-cancelled',
         element: (
           <PrivateRoute>
-            <PaymentCancel />
+            <HrRoutes>
+              <PaymentCancel />
+            </HrRoutes>
           </PrivateRoute>
         ),
       },

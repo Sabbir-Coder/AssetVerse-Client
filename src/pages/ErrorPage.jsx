@@ -32,13 +32,13 @@ const ErrorPage = () => {
       <Navbar />
 
       {/* Decorative Background Blobs */}
-      <main className="flex-grow flex items-center justify-center relative z-10 px-6 py-12">
+      <main className="grow flex items-center justify-center relative z-10 px-6 py-12">
  
           {/* Text Content */}
           <div ref={contentRef} className="text-center">
             {/* Illustration */}
             <div className="flex justify-center w-full">
-              <div ref={imageRef} className="relative animate-bounce w-54 md:w-80">
+              <div ref={imageRef} className="relative animate-pulse w-54 md:w-80">
                 <img
                   src="https://cdn3d.iconscout.com/3d/premium/thumb/404-error-4461124-3696774.png"
                   alt="404 Illustration"
@@ -59,7 +59,7 @@ const ErrorPage = () => {
               </button>
               <button
                 onClick={() => navigate('/')}
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+                className="px-8 py-4 bg-linear-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
               >
                 Back to Home
                 <span className="material-symbols-outlined text-lg">home</span>
