@@ -6,73 +6,97 @@ import AssetCard from '../../../components/AssetCard';
 
 const RequestAsset = () => {
     const [search, setSearch] = useState("");
-    const axiosSecure = useAxiosSecure()
-    const { data: assets, isLoading, isError } = useQuery({
-        queryKey: ['assets'],
+    const [currentPage, setCurrentPage] = useState(1);
+    const limit = 9;
+
+    const axiosSecure = useAxiosSecure();
+
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['assets', currentPage],
         queryFn: async () => {
-            const response = await axiosSecure.get(`/all-assets`);
-            return response.data;
-        }
-    })
-    // console.log(assets);
+            const res = await axiosSecure.get(
+                `/all-assets?page=${currentPage}&limit=${limit}`
+            );
+            return res.data;
+        },
+        keepPreviousData: true,
+    });
 
+    if (isLoading) return <LoadingSpinner />;
+    if (isError) return <div>Error loading assets.</div>;
 
+    const { assets, total } = data;
+    const totalPages = Math.ceil(total / limit);
 
-    // Filter assets by product name
-    const filteredAssets = assets?.filter(asset =>
+    // Client-side search (only on current page data)
+    const filteredAssets = assets.filter(asset =>
         asset.productName.toLowerCase().includes(search.toLowerCase())
     );
 
-    if (isLoading) {
-        return <LoadingSpinner />;
-    }
-    if (isError) {
-        return <div>Error loading assets.</div>;
-    }
-
     return (
         <div className="overflow-x-auto">
-                <div className='flex justify-between items-center px-3'>
-                <div>
-                    <h2 className='font-bold text-3xl'>My All Assets here</h2>
-                </div>
-                <label className="input p-2 ml-3 my-4 flex items-center gap-2 focus-within:outline-blue-700">
-                    <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g
-                            strokeLinejoin="round"
-                            strokeLinecap="round"
-                            strokeWidth="2.5"
-                            fill="none"
-                            stroke="currentColor"
-                        >
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </g>
-                    </svg>
+            {/* Header & Search */}
+            <div className='flex justify-between items-center px-3'>
+                <h2 className='font-bold text-3xl'>My All Assets here</h2>
+
+                <label className="input p-2 ml-3 my-4 flex items-center gap-2">
                     <input
                         type="search"
-                        required
                         placeholder="Search"
                         value={search}
                         onChange={e => setSearch(e.target.value)}
-                        className="bg-transparent outline-blue-500 focus:outline-blue-700"
+                        className="bg-transparent outline-none"
                     />
                 </label>
             </div>
-            <div className='flex mt-15 justify-between items-center px-3'>
 
-                <div className='grid grid-cols-1 sm:grid-cols-2 mx-auto justify-center items-center md:grid-cols-2 lg:grid-cols-3 gap-4'>
-                    {filteredAssets.length === 0 ? (
-                        <p className='text-center font-bold text-gray-600'>No assets found.</p>
-                    ) : (
-                        filteredAssets.map(asset => (
-                            <AssetCard key={asset._id} asset={asset} />
-                        ))
-                    )}
-                </div>
+            {/* Assets Grid */}
+            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-3'>
+                {filteredAssets.length === 0 ? (
+                    <p className='text-center font-bold text-gray-600'>
+                        No assets found.
+                    </p>
+                ) : (
+                    filteredAssets.map(asset => (
+                        <AssetCard key={asset._id} asset={asset} />
+                    ))
+                )}
+            </div>
 
+            {/* Pagination Controls */}
+            <div className="flex justify-center mt-8 gap-2">
+                <button
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(prev => prev - 1)}
+                    className="px-4 py-2 border rounded disabled:opacity-50"
+                >
+                    Previous
+                </button>
+
+                {[...Array(totalPages).keys()].map(page => (
+                    <button
+                        key={page}
+                        onClick={() => setCurrentPage(page + 1)}
+                        className={`px-4 py-2 border rounded ${
+                            currentPage === page + 1
+                                ? 'bg-blue-600 text-white'
+                                : ''
+                        }`}
+                    >
+                        {page + 1}
+                    </button>
+                ))}
+
+                <button
+                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(prev => prev + 1)}
+                    className="px-4 py-2 border rounded disabled:opacity-50"
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
 };
+
 export default RequestAsset;

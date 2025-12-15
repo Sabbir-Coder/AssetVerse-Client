@@ -21,8 +21,6 @@ const SignUpHr = () => {
 
     const onSubmit = async (data) => {
         const { fullName, email, password, companyName, companyLogo, dob } = data;
-        const dateOfBirth = new Date(dob);
-        const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
         const imageFile = companyLogo[0];
 
         try {
@@ -38,7 +36,7 @@ const SignUpHr = () => {
                 companyLogo: photoURL,
                 email,
                 password,
-                dob: formattedDate,
+                dob: dob,
                 role: 'hr',
                 packageLimit: parseInt(5),
                 currentEmployees: parseInt(0),

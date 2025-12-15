@@ -6,10 +6,12 @@ import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/images/placeholder.jpg'
 import logo from '../../../assets/images/logo-flat.png'
 import useRole from '../../../hooks/useRole'
+import { RxExit } from 'react-icons/rx'
+import LoadingSpinner from '../LoadingSpinner'
 
 const Navbar = () => {
   const { role } = useRole()
-  const { user, logOut } = useAuth()
+  const { user, logOut,loading } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -25,6 +27,8 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  if(loading) return <LoadingSpinner/>
 
   return (
     <div className={`fixed w-full bg-white z-999 shadow-sm transition-all duration-300 ${isScrolled ? 'shadow-md' : ''}`}>
@@ -76,22 +80,22 @@ const Navbar = () => {
             {/* Right side - Auth buttons/Avatar */}
             <div className='flex items-center gap-4'>
               {/* Desktop Auth Buttons - Hidden on mobile */}
-              <div className='hidden md:flex items-center gap-3'>
+              <div className='flex items-center gap-3'>
                 {user ? (
                   <>
-                    <img
-                      className='rounded-full cursor-pointer'
-                      referrerPolicy='no-referrer'
-                      src={user && user.photoURL ? user.photoURL : avatarImg}
-                      alt='profile'
-                      height='40'
-                      width='40'
-                    />
+                    <Link to='/dashboard/profile'>
+                      <img
+                        className='rounded-full object-cover h-10 w-10 object-cover'
+                        referrerPolicy='no-referrer'
+                        src={user && user.photoURL ? user.photoURL : avatarImg}
+                        alt='profile'
+                      /></Link>
+
                     <button
                       onClick={logOut}
-                      className='px-4 py-2 text-gray-700 hover:text-primary font-medium transition'
+                      className='hidden md:flex px-4 btn btn-primary rounded-full py-3 border-0 hover:bg-blue-600 transition font-semibold flex justify-center items-center cursor-pointer'
                     >
-                      Logout
+                      <RxExit /> <span>Logout</span>
                     </button>
                   </>
                 ) : (
@@ -166,7 +170,7 @@ const Navbar = () => {
                               logOut()
                               setIsOpen(false)
                             }}
-                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold cursor-pointer'
+                            className='px-4 btn btn-primary rounded-xl py-3 border-0 hover:bg-blue-600 transition font-semibold cursor-pointer'
                           >
                             Logout
                           </div>

@@ -7,10 +7,18 @@ const AssetCard = ({ asset }) => {
   const { user } = useAuth()
   const axiosSecure = useAxiosSecure();
   const { productName, description, productType, quantity, image } = asset;
-console.log(user);
-
 
   const handleRequest = async (asset) => {
+    // Prevent request if out of stock
+    if (quantity <= 0) {
+      Swal.fire({
+        title: "Out of Stock",
+        text: "This item is currently unavailable.",
+        icon: "error"
+      });
+      return;
+    }
+
     const { _id, productName, productType, companyName, hr } = asset;
     try {
       const requestData = {
@@ -28,50 +36,105 @@ console.log(user);
         note: '',
         processedBy: hr.email,
       }
-      // Handle asset request logic here
+
       Swal.fire({
-        title: "Are you sure?",
-        text: "Want to send this request?",
-        icon: "warning",
+        title: "Confirm Request",
+        text: `Do you want to request ${productName}?`,
+        icon: "question",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, send it!"
+        confirmButtonColor: "#2563eb", // blue-600
+        cancelButtonColor: "#ef4444",  // red-500
+        confirmButtonText: "Yes, Request it!",
+        focusConfirm: false,
       }).then(async (result) => {
         if (result.isConfirmed) {
           await axiosSecure.post('/asset-requests', requestData);
           Swal.fire({
-            title: "Sent!",
-            text: "Your request has been sent. Wait For HR Approval",
-            icon: "success"
+            title: "Request Sent!",
+            text: "Your request has been submitted to HR for approval.",
+            icon: "success",
+            confirmButtonColor: "#2563eb"
           });
         }
-
       })
     } catch (error) {
       console.error("Error creating request data:", error);
+      Swal.fire({
+        title: "Error",
+        text: "Something went wrong. Please try again.",
+        icon: "error"
+      });
     }
   };
 
   return (
-    <div className="card h-110 bg-white shadow-sm">
-      <figure className='p-4 bg-gray-300'>
-        <img className='w-full'
+    <div className="group relative bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 overflow-hidden flex flex-col h-full">
+      {/* Image Container */}
+      <div className="relative h-56 overflow-hidden bg-slate-50">
+        <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors z-10" />
+        <img
+          className='w-full h-full object-cover transition-transform duration-700 group-hover:scale-110'
           src={image}
-          alt={productName} />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">
-          {productName}
-        </h2>
-        <p>{description}</p>
-        <div className="badge badge-secondary">NEW</div>
-        <div className="card-actions">
-          <div className="badge badge-outline">{productType}</div>
-          <div className="badge badge-outline">Available: {quantity}</div>
+          alt={productName}
+        />
+
+        {/* Overlay Tags */}
+        <div className="absolute top-3 right-3 z-20">
+          <span className="px-3 py-1 text-xs font-bold text-white bg-black/60 backdrop-blur-md rounded-full uppercase tracking-wide border border-white/10">
+            {productType}
+          </span>
+        </div>
+
+        <div className="absolute top-3 left-3 z-20">
+          {quantity > 0 ? (
+            <span className="px-2.5 py-1 text-xs font-bold text-emerald-700 bg-emerald-100/90 backdrop-blur-md rounded-lg flex items-center gap-1.5 shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              {quantity} Available
+            </span>
+          ) : (
+            <span className="px-2.5 py-1 text-xs font-bold text-red-600 bg-red-100/90 backdrop-blur-md rounded-lg shadow-sm">
+              Out of Stock
+            </span>
+          )}
         </div>
       </div>
-      <button onClick={() => handleRequest(asset)} className="btn btn-primary">Request</button>
+
+      {/* Content Body */}
+      <div className="p-5 flex-1 flex flex-col">
+        <h2 className="text-lg font-bold text-slate-800 mb-2 line-clamp-1 group-hover:text-blue-600 transition-colors">
+          {productName}
+        </h2>
+
+        <p className="text-slate-500 text-sm mb-5 line-clamp-2 flex-1 leading-relaxed">
+          {description}
+        </p>
+
+        {/* Action Footer */}
+        <div className="mt-auto pt-4 border-t border-slate-100">
+          <button
+            onClick={() => handleRequest(asset)}
+            disabled={quantity === 0}
+            className={`w-full py-3 rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-center gap-2 transform active:scale-95
+                    ${quantity > 0
+                ? 'bg-slate-900 text-white hover:bg-slate-700 cursor-pointer shadow-md hover:shadow-blue-500/30'
+                : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+              }
+                `}
+          >
+            {quantity > 0 ? (
+              <>
+                Request Asset
+                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </>
+            ) : (
+              'Unavailable'
+            )}
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

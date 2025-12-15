@@ -42,11 +42,11 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 2 }) => {
 
 const Metric = ({ icon, value, label, prefix = "", suffix = "" }) => (
   <div className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
-    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-    <div className="w-20 h-20 mb-6 rounded-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner ring-1 ring-white/10">
+    <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+    <div className="w-20 h-20 mb-6 rounded-full bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner ring-1 ring-white/10">
       <i className={`ph ${icon} text-4xl text-blue-300 group-hover:text-blue-200 drop-shadow-md`} />
     </div>
-    <div className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-blue-200 mb-2">
+    <div className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-blue-200 mb-2">
       <AnimatedCounter value={value} prefix={prefix} suffix={suffix} />
     </div>
     <div className="text-sm sm:text-base text-slate-300 font-semibold tracking-wider uppercase opacity-90">{label}</div>
@@ -57,7 +57,7 @@ const ActionButton = ({ icon, label, primary }) => (
   <button
     className={`group relative flex-none w-32 p-4 rounded-2xl flex flex-col items-center gap-3 shadow-sm active:scale-95 transition-all duration-300 overflow-hidden
       ${primary
-        ? "bg-gradient-to-br from-blue-600 to-blue-700 text-white shadow-blue-500/30 shadow-lg"
+        ? "bg-linear-to-br from-blue-600 to-blue-700 text-white shadow-blue-500/30 shadow-lg"
         : "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500/50"
       }`}
   >

@@ -51,13 +51,13 @@ const PackageCard = ({ plan }) => {
         name === "Free" || // Free plan is always disabled
         isPremiumPurchased && (name === "Premium" || name === "Standard") || // Disable Premium & Standard if Premium purchased
         isStandardPurchased && name === "Standard"; // Optional: disable Standard if Standard purchased
-// Determine button text
-const buttonText = (() => {
-    if (isPremiumPurchased && (name === "Premium" || name === "Standard")) return "Purchased";
-    if (isStandardPurchased && name === "Standard") return "Purchased";
-    if (name === "Free") return "Free";
-    return `Purchase ${name} Plan`;
-})();
+    // Determine button text
+    const buttonText = (() => {
+        if (isPremiumPurchased && (name === "Premium" || name === "Standard")) return "Purchased";
+        if (isStandardPurchased && name === "Standard") return "Purchased";
+        if (name === "Free") return "Free";
+        return `Purchase ${name} Plan`;
+    })();
 
 
 
@@ -87,17 +87,17 @@ const buttonText = (() => {
                     </li>
                 ))}
             </ul>
-  <button
-    onClick={() => handlePayment(plan)}
-    className={`w-full py-4 text-center rounded-2xl text-white font-bold transition-colors relative z-10
+            <button
+                onClick={() => handlePayment(plan)}
+                className={`w-full py-4 text-center rounded-2xl text-white font-bold transition-colors relative z-10
         ${isDisabled
-            ? "bg-gray-500 cursor-not-allowed pointer-events-none"
-            : "bg-[#040c50] cursor-pointer hover:bg-[#403e86]"
-        }`}
-    disabled={isDisabled}
->
-    {buttonText}
-</button>
+                        ? "bg-gray-500 cursor-not-allowed pointer-events-none"
+                        : "bg-[#040c50] cursor-pointer hover:bg-[#403e86]"
+                    }`}
+                disabled={isDisabled}
+            >
+                {buttonText}
+            </button>
 
 
         </div>

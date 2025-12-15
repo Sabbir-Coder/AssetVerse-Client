@@ -28,8 +28,6 @@ const SignUpEmployee = () => {
         console.log("Loading set to true");
 
         const { name, email, photo, password, dob } = data;
-        const dateOfBirth = new Date(dob);
-        const formattedDate = dateOfBirth.toLocaleDateString('en-GB');
         const ImageFile = photo[0];
 
 
@@ -46,9 +44,10 @@ const SignUpEmployee = () => {
                 email,
                 photoURL,
                 password,
-                dob: formattedDate,
+                dateOfBirth: dob, // <-- IMPORTANT
                 role: 'employee',
             });
+
             navigate(from, { replace: true });
             toast.success('Employee Account Created Successfully');
             console.log(data);

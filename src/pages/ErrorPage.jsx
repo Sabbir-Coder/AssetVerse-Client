@@ -1,69 +1,75 @@
-import Button from '../components/Shared/Button/Button'
-import { useNavigate } from 'react-router'
+
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
 import Navbar from '../components/Shared/Navbar/Navbar'
 import Footer from '../components/Shared/Footer/Footer'
+import { useNavigate } from 'react-router'
 
 const ErrorPage = () => {
   const navigate = useNavigate()
+  const contentRef = useRef(null)
+  const imageRef = useRef(null)
+
+  useEffect(() => {
+    // Animate content entrance
+    gsap.fromTo(contentRef.current.children,
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, stagger: 0.15, ease: "power3.out" }
+    )
+
+    // Floating animation for the image
+    gsap.to(imageRef.current, {
+      y: -20,
+      duration: 2.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "power1.inOut"
+    })
+  }, [])
 
   return (
-    <>
+    <div className="min-h-screen flex flex-col bg-slate-50 relative overflow-x-hidden font-sans">
       <Navbar />
-      <section className='bg-white '>
-        <div className='container flex items-center min-h-screen px-6 py-12 mx-auto'>
-          <div className='flex flex-col items-center max-w-sm mx-auto text-center'>
-            <p className='p-3 text-sm font-medium text-lime-500 rounded-full bg-blue-50 '>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='2'
-                stroke='currentColor'
-                className='w-6 h-6'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z'
-                />
-              </svg>
-            </p>
-            <h1 className='mt-3 text-2xl font-semibold text-gray-800  md:text-3xl'>
-              Something Went Wrong!
-            </h1>
-            <p className='mt-4 text-gray-500 '>Here are some helpful links:</p>
 
-            <div className='flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto'>
+      {/* Decorative Background Blobs */}
+      <main className="flex-grow flex items-center justify-center relative z-10 px-6 py-12">
+ 
+          {/* Text Content */}
+          <div ref={contentRef} className="text-center">
+            {/* Illustration */}
+            <div className="flex justify-center w-full">
+              <div ref={imageRef} className="relative animate-bounce w-54 md:w-80">
+                <img
+                  src="https://cdn3d.iconscout.com/3d/premium/thumb/404-error-4461124-3696774.png"
+                  alt="404 Illustration"
+                  className="w-full h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-800 mb-8">
+              Page Not Found
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={() => navigate(-1)}
-                className='flex items-center justify-center w-1/2 px-5 py-1 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto   hover:bg-gray-100 '
+                className="px-8 py-4 bg-white text-slate-700 font-bold rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:bg-slate-50 transition-all flex items-center justify-center gap-2 group"
               >
-                <svg
-                  xmlns='http://www.w3.org/2000/svg'
-                  fill='none'
-                  viewBox='0 0 24 24'
-                  strokeWidth='1.5'
-                  stroke='currentColor'
-                  className='w-5 h-5 rtl:rotate-180 text-lime-500'
-                >
-                  <path
-                    strokeLinecap='round'
-                    strokeLinejoin='round'
-                    d='M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18'
-                  />
-                </svg>
-
-                <span>Go back</span>
+                <span className="material-symbols-outlined group-hover:-translate-x-1 transition-transform text-lg">arrow_back</span>
+                Go Back
               </button>
-
-              <Button label={'Take Me Home'} onClick={() => navigate('/')} />
+              <button
+                onClick={() => navigate('/')}
+                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2"
+              >
+                Back to Home
+                <span className="material-symbols-outlined text-lg">home</span>
+              </button>
             </div>
           </div>
-        </div>
-      </section>
-      <Footer />
-    </>
 
+      </main>
+      <Footer />
+    </div>
   )
 }
 
