@@ -5,8 +5,10 @@ import { Link } from 'react-router'
 import useAuth from '../../../hooks/useAuth'
 import avatarImg from '../../../assets/images/placeholder.jpg'
 import logo from '../../../assets/images/logo-flat.png'
+import useRole from '../../../hooks/useRole'
 
 const Navbar = () => {
+  const { role } = useRole()
   const { user, logOut } = useAuth()
   const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -56,6 +58,19 @@ const Navbar = () => {
                   Dashboard
                 </Link>
               )}
+              {role === 'hr' && (
+                <a
+                  href='#pricing'
+                  className='text-gray-700 hover:text-primary font-medium transition'
+                >
+                  Pricing
+                </a>
+              )}
+
+              <a href="#testimonials" className='text-gray-700 hover:text-primary font-medium transition'>Testimonials</a>
+              <a href="#how-it-works" className='text-gray-700 hover:text-primary font-medium transition'>About</a>
+              <a href="#contact" className='text-gray-700 hover:text-primary font-medium transition'>Contact</a>
+              <a href="#faq" className='text-gray-700 hover:text-primary font-medium transition'>FAQ</a>
             </nav>
 
             {/* Right side - Auth buttons/Avatar */}
@@ -128,6 +143,24 @@ const Navbar = () => {
                           >
                             Dashboard
                           </Link>
+                          {role === 'hr' && (
+                            <a
+                              href='#pricing'
+                              onClick={() => setIsOpen(false)}
+                              className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+                            >
+                              Pricing
+                            </a>
+                          )}
+
+                          <a href="#testimonials" onClick={() => setIsOpen(false)}
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'>Testimonials</a>
+                          <a href="#how-it-works" onClick={() => setIsOpen(false)}
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'>About</a>
+                          <a href="#contact" onClick={() => setIsOpen(false)}
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'>Contact</a>
+                          <a href="#faq" onClick={() => setIsOpen(false)}
+                            className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'>FAQ</a>
                           <div
                             onClick={() => {
                               logOut()
@@ -154,6 +187,7 @@ const Navbar = () => {
                           >
                             Join as HR Manager
                           </Link>
+
 
                         </>
                       )}
