@@ -60,12 +60,12 @@ const Home = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.2,
+          duration: 0.4,
+          stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: aboutSectionRef.current,
-            start: "top 90%",
+            start: "top 95%",
           }
         }
       );
@@ -78,12 +78,12 @@ const Home = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.2,
+          duration: 0.4,
+          stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: aboutSectionRef.current,
-            start: "top 90%",
+            start: "top 95%",
           }
         }
       );
@@ -97,12 +97,12 @@ const Home = () => {
           {
             y: 0,
             opacity: 1,
-            duration: 0.6,
-            stagger: 0.2,
+            duration: 0.4,
+            stagger: 0.1,
             ease: "power3.out",
             scrollTrigger: {
               trigger: ref.current,
-              start: "top 90%",
+              start: "top 95%",
             }
           }
         );
@@ -121,11 +121,11 @@ const Home = () => {
           y: 0,
           opacity: 1,
           scale: 1,
-          duration: 0.6,
+          duration: 0.4,
           ease: "power3.out",
           scrollTrigger: {
             trigger: testimonialSwiperRef.current,
-            start: "top 90%",
+            start: "top 95%",
           }
         }
       );
@@ -139,12 +139,12 @@ const Home = () => {
         {
           x: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.2,
+          duration: 0.4,
+          stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: stepsSectionRef.current,
-            start: "top 90%",
+            start: "top 95%",
           }
         }
       );
@@ -158,12 +158,12 @@ const Home = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 0.5,
-          stagger: 0.1,
+          duration: 0.3,
+          stagger: 0.05,
           ease: "power2.out",
           scrollTrigger: {
             trigger: faqSectionRef.current,
-            start: "top 90%",
+            start: "top 95%",
           }
         }
       );
@@ -176,11 +176,11 @@ const Home = () => {
         {
           scale: 1,
           opacity: 1,
-          duration: 0.6,
+          duration: 0.4,
           ease: "back.out(1.7)",
           scrollTrigger: {
             trigger: ctaSectionRef.current,
-            start: "top 90%",
+            start: "top 95%",
           }
         }
       );
@@ -200,12 +200,12 @@ const Home = () => {
         {
           y: 0,
           opacity: 1,
-          duration: 0.5,
-          stagger: 0.15,
+          duration: 0.4,
+          stagger: 0.1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: pricingSectionRef.current,
-            start: "top 90%",
+            start: "top 95%",
           }
         }
       );
