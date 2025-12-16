@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from '../../../hooks/useAuth';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -14,6 +14,16 @@ const MyAsset = () => {
             return response.data;
         }
     })
+console.log(myAssets);
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filterType, setFilterType] = useState("");
+
+    const filteredAssets = myAssets?.filter(asset => {
+        const matchesSearch = asset.productName.toLowerCase().includes(searchTerm.toLowerCase());
+        const matchesType = filterType ? asset.productType === filterType : true;
+        return matchesSearch && matchesType;
+    });
 
 
     const handlePrint = (asset) => {
@@ -61,6 +71,26 @@ const MyAsset = () => {
             <h2 className='text-3xl font-bold text-gray-600 my-5'>All Requested Assets</h2>
             <p className='text-gray-500 mb-10'>All your requested assets and their status.
             </p>
+
+            <div className="flex flex-col md:flex-row gap-4 mb-6">
+                <input
+                    type="text"
+                    placeholder="Search by asset name"
+                    className="input input-bordered w-full max-w-xs"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <select
+                    className="select select-bordered w-full max-w-xs"
+                    value={filterType}
+                    onChange={(e) => setFilterType(e.target.value)}
+                >
+                    <option value="">All Types</option>
+                    <option value="Returnable">Returnable</option>
+                    <option value="Non-Returnable">Non-returnable</option>
+                </select>
+            </div>
+
             <table className="table-auto border-collapse border-gray-300 border w-full">
                 <thead>
                     <tr>
@@ -76,7 +106,7 @@ const MyAsset = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {myAssets.length === 0 ? <tr><td colSpan="8" className="text-center py-4 border border-gray-300 text-gray-400">No assets found</td></tr> : myAssets?.map((req, i) => (
+                    {filteredAssets?.length === 0 ? <tr><td colSpan="9" className="text-center py-4 border border-gray-300 text-gray-400">No assets found</td></tr> : filteredAssets?.map((req, i) => (
                         <tr key={i} className='text-sm'>
                             <td className="border border-gray-300 px-4 py-2">
                                 <img src={req.assetImage} alt={req.productName} className="w-12 h-12 object-cover rounded" />
