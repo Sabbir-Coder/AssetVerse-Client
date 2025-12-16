@@ -14,7 +14,7 @@ const Footer = () => {
               Empowering businesses with smart asset management solutions. Track, manage, and optimize your resources efficiently.
             </p>
             <div className="flex gap-4">
-              {['facebook', 'twitter', 'linkedin', 'instagram'].map((social) => (
+              {['facebook', 'twitter',  'instagram'].map((social) => (
                 <a
                   key={social}
                   href="#"

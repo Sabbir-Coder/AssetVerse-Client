@@ -11,7 +11,12 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 2 }) => {
     const element = elementRef.current;
     if (!element) return;
 
-    gsap.fromTo(
+    gsap.killTweensOf(element);
+
+    const tl = gsap.timeline();
+
+    // Intro animation: 0 -> Value
+    tl.fromTo(
       element,
       { innerText: 0 },
       {
@@ -19,16 +24,24 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 2 }) => {
         duration: duration,
         ease: "power2.out",
         snap: { innerText: 1 },
-        scrollTrigger: {
-          trigger: element,
-          start: "top 85%",
-          once: true,
-        },
         onUpdate: function () {
           element.innerText = Math.ceil(this.targets()[0].innerText).toLocaleString();
         },
       }
     );
+
+    // Continuous "Live" increment: Value -> Infinity
+    tl.to(element, {
+      innerText: value + 10000, // Simulates infinite growth
+      duration: 3000, // Very slow continuous counting
+      ease: "linear",
+      snap: { innerText: 1 },
+      onUpdate: function () {
+        element.innerText = Math.ceil(this.targets()[0].innerText).toLocaleString();
+      },
+    });
+
+    return () => tl.kill();
   }, [value, duration]);
 
   return (

@@ -14,8 +14,6 @@
 - Provides clear visibility into the company asset inventory
 - Reduces administrative overhead for HR departments
 - Ensures proper tracking of returnable vs non-returnable items
-
--
 - HR Managers register their company, get a default subscription package (5 employees), and manage assets
 - Employees register independently, request assets, and get affiliated with companies automatically
 - Assets are tracked from inventory → assignment → return (optional)
