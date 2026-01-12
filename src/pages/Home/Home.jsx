@@ -322,18 +322,18 @@ const Home = () => {
       <Features />
 
       {/* Why AssetVerse Section */}
-      <section className="py-20 px-4  relative overflow-hidden">
+      <section className="py-20 px-4 relative overflow-hidden bg-white dark:bg-slate-900">
         {/* Decorative background blobs */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-corporate/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary-corporate/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#2e4057]/5 dark:bg-[#2e4057]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#048ba8]/5 dark:bg-[#048ba8]/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           <div ref={aboutSectionRef} className="text-center mb-16 max-w-3xl mx-auto">
-            <span className="text-secondary-corporate font-bold tracking-wider uppercase text-sm mb-3 block">Why Choose Us</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black/80 mb-6 leading-tight">
-              Empowering Your Business with <span className="text-blue-700">Smart Asset Management</span>
+            <span className="text-[#048ba8] dark:text-[#4db4c7] font-bold tracking-wider uppercase text-sm mb-3 block">Why Choose Us</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
+              Empowering Your Business with <span className="text-[#2e4057] dark:text-[#5c6d7d]">Smart Asset Management</span>
             </h2>
-            <p className="text-lg text-gray-500 leading-relaxed">
+            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               Experience the next generation of asset tracking. We combine powerful features with intuitive design to streamline your operations.
             </p>
           </div>
@@ -343,24 +343,24 @@ const Home = () => {
               <div
                 key={index}
                 ref={addToFeatureRefs}
-                className="group relative bg-slate-800/10 rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-2xl border border-slate-200 overflow-hidden"
+                className="group relative bg-white dark:bg-slate-800 rounded-2xl p-8 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden"
               >
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary-corporate/10 to-transparent rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-500" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#2e4057]/10 dark:from-[#2e4057]/20 to-transparent rounded-bl-full -mr-8 -mt-8 transition-transform group-hover:scale-150 duration-500" />
 
                 <div className="relative z-10">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary-corporate to-blue-600 flex items-center justify-center text-white shadow-lg shadow-blue-500/30 mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#2e4057] to-[#293a4f] dark:from-[#5c6d7d] dark:to-[#2e4057] flex items-center justify-center text-white shadow-lg shadow-[#2e4057]/30 dark:shadow-[#2e4057]/50 mb-6 group-hover:scale-110 transition-transform duration-300">
                     <span className="material-symbols-outlined text-3xl">{feature.icon}</span>
                   </div>
 
-                  <h3 className="text-2xl font-bold text-black/80 mb-3">
+                  <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">
                     {feature.title}
                   </h3>
 
-                  <p className="text-slate-600 leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-400 leading-relaxed">
                     {feature.description}
                   </p>
 
-                  <div className="mt-6 flex items-center text-primary-corporate font-semibold text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+                  <div className="mt-6 flex items-center text-[#2e4057] dark:text-[#5c6d7d] font-semibold text-sm opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300">
                     Learn more <span className="material-symbols-outlined ml-1 text-sm">arrow_forward</span>
                   </div>
                 </div>
@@ -373,20 +373,20 @@ const Home = () => {
       {/* Packages Section */}
       {
         user && role === 'hr' && (
-          <section id='pricing' ref={pricingSectionRef} className="py-20 px-4 relative overflow-hidden bg-slate-50/50">
+          <section id='pricing' ref={pricingSectionRef} className="py-20 px-4 relative overflow-hidden bg-slate-50 dark:bg-slate-800/50">
             {/* Decorative background blobs */}
             <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0 pointer-events-none">
-              <div className="absolute top-[20%] left-[10%] w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
-              <div className="absolute bottom-[20%] right-[10%] w-72 h-72 bg-purple-500/5 rounded-full blur-3xl" />
+              <div className="absolute top-[20%] left-[10%] w-72 h-72 bg-[#2e4057]/5 dark:bg-[#2e4057]/10 rounded-full blur-3xl" />
+              <div className="absolute bottom-[20%] right-[10%] w-72 h-72 bg-[#048ba8]/5 dark:bg-[#048ba8]/10 rounded-full blur-3xl" />
             </div>
 
             <div className="max-w-7xl mx-auto relative z-10">
               <div className="text-center mb-16 max-w-3xl mx-auto">
-                <span className="text-secondary-corporate font-bold tracking-wider uppercase text-sm mb-3 block">Pricing Plans</span>
-                <h2 className="text-4xl md:text-5xl font-bold text-black/80 mb-6 leading-tight">
-                  Choose the Perfect Plan for <span className="text-blue-700">Your Team</span>
+                <span className="text-[#048ba8] dark:text-[#4db4c7] font-bold tracking-wider uppercase text-sm mb-3 block">Pricing Plans</span>
+                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
+                  Choose the Perfect Plan for <span className="text-[#2e4057] dark:text-[#5c6d7d]">Your Team</span>
                 </h2>
-                <p className="text-lg text-gray-500">
+                <p className="text-lg text-slate-600 dark:text-slate-400">
                   Scalable solutions designed to grow with your business needs.
                 </p>
               </div>
@@ -404,14 +404,14 @@ const Home = () => {
       }
 
       {/* Testimonial Section with Swiper */}
-      <section id='testimonials' className="py-20 px-4 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary-corporate/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+      <section id='testimonials' className="py-20 px-4 relative overflow-hidden bg-white dark:bg-slate-900">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#2e4057]/5 dark:bg-[#2e4057]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
 
         <div ref={testimonialRef} className="max-w-7xl mx-auto relative z-10">
           <div ref={testimonialHeaderRef} className="text-center mb-16 max-w-3xl mx-auto">
-            <span className="text-secondary-corporate font-bold tracking-wider uppercase text-sm mb-3 block">Testimonials</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black/80">
-              Trusted by <span className="text-blue-700">Industry Leaders</span>
+            <span className="text-[#048ba8] dark:text-[#4db4c7] font-bold tracking-wider uppercase text-sm mb-3 block">Testimonials</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100">
+              Trusted by <span className="text-[#2e4057] dark:text-[#5c6d7d]">Industry Leaders</span>
             </h2>
           </div>
 
@@ -428,8 +428,8 @@ const Home = () => {
               }}
               pagination={{
                 clickable: true,
-                bulletClass: 'swiper-pagination-bullet !bg-secondary-corporate/30',
-                bulletActiveClass: 'swiper-pagination-bullet-active !bg-secondary-corporate',
+                bulletClass: 'swiper-pagination-bullet-custom',
+                bulletActiveClass: 'swiper-pagination-bullet-custom-active',
               }}
               navigation={{
                 prevEl: '.swiper-button-prev-custom',
@@ -440,29 +440,29 @@ const Home = () => {
             >
               {testimonials.map((testimonial, index) => (
                 <SwiperSlide key={index}>
-                  <div className="bg-white/80 backdrop-blur-sm rounded-3xl p-10 shadow-xl border border-white/50 text-center mx-4 my-8 relative group">
+                  <div className="bg-white dark:bg-slate-800 backdrop-blur-sm rounded-2xl p-10 shadow-xl border border-slate-200 dark:border-slate-700 text-center mx-4 my-8 relative group">
                     <div className="w-20 h-20 mx-auto mb-6 relative">
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary-corporate to-secondary-corporate rounded-full blur opacity-40 group-hover:opacity-60 transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-br from-[#2e4057] to-[#048ba8] rounded-full blur opacity-40 group-hover:opacity-60 transition-opacity" />
                       <img
                         src={testimonial.image}
                         alt={testimonial.name}
-                        className="w-full h-full object-cover rounded-full border-4 border-white shadow-lg relative z-10"
+                        className="w-full h-full object-cover rounded-full border-4 border-white dark:border-slate-800 shadow-lg relative z-10"
                       />
-                      <div className="absolute -bottom-2 -right-2 bg-white rounded-full p-1.5 shadow-md z-20">
-                        <span className="material-symbols-outlined text-secondary-corporate text-lg">
+                      <div className="absolute -bottom-2 -right-2 bg-white dark:bg-slate-800 rounded-full p-1.5 shadow-md z-20 border border-slate-200 dark:border-slate-700">
+                        <span className="material-symbols-outlined text-[#048ba8] dark:text-[#4db4c7] text-lg">
                           format_quote
                         </span>
                       </div>
                     </div>
 
-                    <p className="text-slate-600 italic text-xl my-6 leading-relaxed">
+                    <p className="text-slate-600 dark:text-slate-400 italic text-xl my-6 leading-relaxed">
                       "{testimonial.quote}"
                     </p>
                     <div className="flex flex-col items-center gap-1">
-                      <p className="font-bold text-black/80 text-lg">
+                      <p className="font-bold text-slate-900 dark:text-slate-100 text-lg">
                         {testimonial.name}
                       </p>
-                      <p className="text-sm text-slate-500 font-medium">
+                      <p className="text-sm text-slate-500 dark:text-slate-400 font-medium">
                         {testimonial.title}
                       </p>
                     </div>
@@ -472,10 +472,10 @@ const Home = () => {
             </Swiper>
             {/* Custom Navigation Buttons */}
             <div className="flex justify-center gap-4 mt-2">
-              <button className="swiper-button-prev-custom w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-corporate hover:scale-110 shadow-sm hover:shadow-md transition-all">
+              <button className="swiper-button-prev-custom w-12 h-12 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-[#2e4057] dark:text-[#5c6d7d] hover:scale-110 shadow-sm hover:shadow-md transition-all">
                 <span className="material-symbols-outlined">chevron_left</span>
               </button>
-              <button className="swiper-button-next-custom w-12 h-12 rounded-full bg-white border border-gray-200 flex items-center justify-center text-primary-corporate hover:scale-110 shadow-sm hover:shadow-md transition-all">
+              <button className="swiper-button-next-custom w-12 h-12 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-[#2e4057] dark:text-[#5c6d7d] hover:scale-110 shadow-sm hover:shadow-md transition-all">
                 <span className="material-symbols-outlined">chevron_right</span>
               </button>
             </div>
@@ -484,31 +484,31 @@ const Home = () => {
       </section>
 
       {/* How It Works Section */}
-      <section id='how-it-works' ref={stepsSectionRef} className="py-20 px-4 relative overflow-hidden bg-slate-50/50">
+      <section id='how-it-works' ref={stepsSectionRef} className="py-20 px-4 relative overflow-hidden bg-slate-50 dark:bg-slate-800/50">
         <div className="max-w-7xl mx-auto relative z-10">
           <div ref={stepsHeaderRef} className="text-center mb-16 max-w-3xl mx-auto">
-            <span className="text-secondary-corporate font-bold tracking-wider uppercase text-sm mb-3 block">How It Works</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black/80 mb-6 leading-tight">
-              Get Started in <span className="text-blue-700">3 Simple Steps</span>
+            <span className="text-[#048ba8] dark:text-[#4db4c7] font-bold tracking-wider uppercase text-sm mb-3 block">How It Works</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
+              Get Started in <span className="text-[#2e4057] dark:text-[#5c6d7d]">3 Simple Steps</span>
             </h2>
-            <p className="text-lg text-gray-500 leading-relaxed">
+            <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
               We've streamlined the process so you can start managing assets in minutes.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step, index) => (
-              <div key={index} ref={addToStepsRefs} className="group relative bg-white rounded-3xl p-8 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-2xl border border-slate-100 overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-secondary-corporate/5 to-transparent rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500" />
+              <div key={index} ref={addToStepsRefs} className="group relative bg-white dark:bg-slate-800 rounded-2xl p-8 hover:-translate-y-2 transition-all duration-300 shadow-lg hover:shadow-xl border border-slate-200 dark:border-slate-700 overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#048ba8]/5 dark:from-[#048ba8]/10 to-transparent rounded-bl-full -mr-4 -mt-4 transition-transform group-hover:scale-150 duration-500" />
 
-                <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-gradient-to-br from-secondary-corporate/10 to-emerald-500/10 text-secondary-corporate font-bold text-2xl rounded-2xl group-hover:from-secondary-corporate group-hover:to-emerald-500 group-hover:text-white transition-all duration-300 mb-6">
+                <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center bg-gradient-to-br from-[#048ba8]/10 to-[#4db4c7]/10 dark:from-[#048ba8]/20 dark:to-[#4db4c7]/20 text-[#048ba8] dark:text-[#4db4c7] font-bold text-2xl rounded-2xl group-hover:from-[#048ba8] group-hover:to-[#036d85] group-hover:text-white transition-all duration-300 mb-6">
                   {step.number}
                 </div>
                 <div className="relative z-10">
-                  <h3 className="font-bold text-black/80 text-xl mb-3">
+                  <h3 className="font-bold text-slate-900 dark:text-slate-100 text-xl mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">
+                  <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </div>
@@ -519,13 +519,13 @@ const Home = () => {
       </section>
 
       {/* FAQ Section */}
-      <section id='faq' ref={faqSectionRef} className="py-20 px-4 relative overflow-hidden">
-        <div className="absolute top-1/2 left-0 w-64 h-64 bg-primary-corporate/5 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
+      <section id='faq' ref={faqSectionRef} className="py-20 px-4 relative overflow-hidden bg-white dark:bg-slate-900">
+        <div className="absolute top-1/2 left-0 w-64 h-64 bg-[#2e4057]/5 dark:bg-[#2e4057]/10 rounded-full blur-3xl -translate-y-1/2 -translate-x-1/2" />
         <div className="max-w-4xl mx-auto relative z-10">
           <div ref={faqHeaderRef} className="text-center mb-16">
-            <span className="text-secondary-corporate font-bold tracking-wider uppercase text-sm mb-3 block">FAQ</span>
-            <h2 className="text-4xl md:text-5xl font-bold text-black/80 mb-6 leading-tight">
-              Frequently Asked <span className="text-blue-700">Questions</span>
+            <span className="text-[#048ba8] dark:text-[#4db4c7] font-bold tracking-wider uppercase text-sm mb-3 block">FAQ</span>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 leading-tight">
+              Frequently Asked <span className="text-[#2e4057] dark:text-[#5c6d7d]">Questions</span>
             </h2>
           </div>
 
@@ -534,17 +534,17 @@ const Home = () => {
               <details
                 key={index}
                 ref={addToFaqRefs}
-                className="group bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:shadow-md transition-all duration-300"
+                className="group bg-white dark:bg-slate-800 rounded-2xl p-6 border border-slate-200 dark:border-slate-700 shadow-sm hover:shadow-md transition-all duration-300"
               >
                 <summary className="flex cursor-pointer items-center justify-between">
-                  <h3 className="font-bold text-black/80 text-lg pr-4">
+                  <h3 className="font-bold text-slate-900 dark:text-slate-100 text-lg pr-4">
                     {faq.question}
                   </h3>
-                  <span className="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-secondary-corporate flex-shrink-0">
+                  <span className="material-symbols-outlined transition-transform duration-300 group-open:rotate-180 text-[#048ba8] dark:text-[#4db4c7] flex-shrink-0">
                     expand_more
                   </span>
                 </summary>
-                <p className="mt-4 text-slate-600 leading-relaxed border-t border-slate-100 pt-4">
+                <p className="mt-4 text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200 dark:border-slate-700 pt-4">
                   {faq.answer}
                 </p>
               </details>
@@ -554,18 +554,18 @@ const Home = () => {
       </section>
 
       {/* Contact CTA Section */}
-      <section id='contact' ref={ctaSectionRef} className="py-20 px-4">
-        <div className="max-w-5xl mx-auto bg-slate-900 rounded-[2.5rem] p-12 md:p-20 text-center text-white shadow-2xl relative overflow-hidden group">
+      <section id='contact' ref={ctaSectionRef} className="py-20 px-4 bg-white dark:bg-slate-900">
+        <div className="max-w-5xl mx-auto bg-gradient-to-br from-[#2e4057] to-[#048ba8] dark:from-[#293a4f] dark:to-[#036d85] rounded-2xl p-12 md:p-20 text-center text-white shadow-2xl relative overflow-hidden group">
           {/* Animated Background */}
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 transition-transform duration-700 group-hover:scale-110" />
-          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 transition-transform duration-700 group-hover:scale-110" />
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#2e4057]/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 transition-transform duration-700 group-hover:scale-110" />
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#f18f01]/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2 transition-transform duration-700 group-hover:scale-110" />
 
           <div className="relative z-10">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">Ready to take control of <br /><span className="text-blue-400">your assets?</span></h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">Ready to take control of <br /><span className="text-[#f18f01]">your assets?</span></h2>
             <p className="text-slate-400 mt-4 mb-10 text-lg md:text-xl max-w-2xl mx-auto">
               Join thousands of companies using AssetVerse to streamline their operations today.
             </p>
-            <button className="inline-flex items-center justify-center px-8 py-4 bg-white text-slate-900 text-lg font-bold rounded-xl shadow-lg hover:shadow-xl hover:bg-blue-50 transform hover:-translate-y-1 transition-all duration-300 group-hover:scale-105">
+            <button className="inline-flex items-center justify-center px-8 py-4 bg-[#f18f01] hover:bg-[#e08201] text-white text-lg font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 group-hover:scale-105">
               <span className="mr-2">Request a Quote</span>
               <span className="material-symbols-outlined">arrow_forward</span>
             </button>
@@ -574,7 +574,7 @@ const Home = () => {
       </section>
 
       {/* Bottom Spacer */}
-      <div className="h-5 bg-background-light "></div>
+      <div className="h-5 bg-white dark:bg-slate-900"></div>
     </div>
   );
 };

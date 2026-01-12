@@ -54,12 +54,12 @@ const AnimatedCounter = ({ value, prefix = "", suffix = "", duration = 2 }) => {
 };
 
 const Metric = ({ icon, value, label, prefix = "", suffix = "" }) => (
-  <div className="group relative flex flex-col items-center justify-center p-8 rounded-3xl bg-white/5 backdrop-blur-md border border-white/10 shadow-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
-    <div className="absolute inset-0 rounded-3xl bg-linear-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-    <div className="w-20 h-20 mb-6 rounded-full bg-linear-to-br from-blue-500/20 to-purple-500/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner ring-1 ring-white/10">
-      <i className={`ph ${icon} text-4xl text-blue-300 group-hover:text-blue-200 drop-shadow-md`} />
+  <div className="group relative flex flex-col items-center justify-center p-8 rounded-2xl bg-white/5 dark:bg-white/5 backdrop-blur-md border border-white/10 dark:border-white/10 shadow-2xl hover:bg-white/10 dark:hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+    <div className="w-20 h-20 mb-6 rounded-full bg-gradient-to-br from-[#2e4057]/20 to-[#048ba8]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-inner ring-1 ring-white/10">
+      <i className={`ph ${icon} text-4xl text-[#4db4c7] group-hover:text-[#6cc1d1] drop-shadow-md`} />
     </div>
-    <div className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-linear-to-r from-white to-blue-200 mb-2">
+    <div className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-[#4db4c7] mb-2">
       <AnimatedCounter value={value} prefix={prefix} suffix={suffix} />
     </div>
     <div className="text-sm sm:text-base text-slate-300 font-semibold tracking-wider uppercase opacity-90">{label}</div>
@@ -68,14 +68,14 @@ const Metric = ({ icon, value, label, prefix = "", suffix = "" }) => (
 
 const ActionButton = ({ icon, label, primary }) => (
   <button
-    className={`group relative flex-none w-32 p-4 rounded-2xl flex flex-col items-center gap-3 shadow-sm active:scale-95 transition-all duration-300 overflow-hidden
+    className={`group relative flex-none w-32 p-4 rounded-xl flex flex-col items-center gap-3 shadow-sm active:scale-95 transition-all duration-300 overflow-hidden
       ${primary
-        ? "bg-linear-to-br from-blue-600 to-blue-700 text-white shadow-blue-500/30 shadow-lg"
-        : "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500/50"
+        ? "bg-gradient-to-br from-[#2e4057] to-[#293a4f] text-white shadow-[#2e4057]/30 shadow-lg"
+        : "bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-[#048ba8]/50"
       }`}
   >
     <div className={`absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ${primary ? '' : 'hidden'}`} />
-    <i className={`ph-bold ${icon} text-2xl transition-transform group-hover:scale-110 ${primary ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
+    <i className={`ph-bold ${icon} text-2xl transition-transform group-hover:scale-110 ${primary ? 'text-white' : 'text-[#2e4057] dark:text-[#5c6d7d]'}`} />
     <span className="text-xs font-semibold tracking-wide">{label}</span>
   </button>
 );
@@ -101,8 +101,8 @@ const Features = () => {
 
         {/* Abstract Background Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
-          <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-blue-600/20 rounded-full blur-[120px]" />
-          <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-purple-600/20 rounded-full blur-[120px]" />
+          <div className="absolute -top-[10%] -left-[10%] w-[50%] h-[50%] bg-[#2e4057]/20 rounded-full blur-[120px]" />
+          <div className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-[#048ba8]/20 rounded-full blur-[120px]" />
         </div>
 
         <div className="relative z-10 flex flex-col justify-center px-6 text-white">

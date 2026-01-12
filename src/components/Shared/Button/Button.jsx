@@ -7,19 +7,20 @@ const Button = ({ label, onClick, disabled, outline, small, icon: Icon }) => {
           relative
           disabled:opacity-70
           disabled:cursor-not-allowed
-          rounded-lg
-          hover:opacity-80
+          rounded-xl
+          hover:opacity-90
           transition
           cursor-pointer
           px-4
           w-full
-          ${outline ? 'bg-white' : 'bg-blue-700'}
-          ${outline ? 'border-black' : 'border-blue-700'}
-          ${outline ? 'text-black' : 'text-white'}
+          ${outline ? 'bg-white dark:bg-slate-800' : 'bg-blue-600 dark:bg-blue-500'}
+          ${outline ? 'border-slate-300 dark:border-slate-600' : 'border-blue-600 dark:border-blue-500'}
+          ${outline ? 'text-slate-900 dark:text-slate-100' : 'text-white'}
+          ${outline ? 'hover:bg-slate-100 dark:hover:bg-slate-700' : 'hover:bg-blue-700 dark:hover:bg-blue-600'}
           ${small ? 'text-sm' : 'text-md'}
-          ${small ? 'py-1' : 'py-3'}
-          ${small ? 'font-light' : 'font-semibold'}
-          ${small ? 'border' : 'border-2'}
+          ${small ? 'py-2' : 'py-3'}
+          ${small ? 'font-medium' : 'font-semibold'}
+          border-2
         `}
     >
       {Icon && (

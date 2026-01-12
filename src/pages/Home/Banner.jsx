@@ -112,41 +112,41 @@ const Banner = () => {
 
 
   return (
-    <section ref={heroVisualRef} className="relative overflow-hidden bg-linear-to-br from-blue-50 via-white to-blue-100">
+    <section ref={heroVisualRef} className="relative overflow-hidden bg-gradient-to-br from-[#2e4057]/5 via-white to-[#048ba8]/5 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
 
       {/* Decorative blur elements */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
+      <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#2e4057]/10 dark:bg-[#2e4057]/20 rounded-full blur-3xl" />
+      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#048ba8]/10 dark:bg-[#048ba8]/20 rounded-full blur-3xl" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
         {/* LEFT CONTENT */}
         <div ref={heroVisualRef} className="space-y-6 hero-text">
-          <span ref={heroTextRef} className="inline-block px-4 py-1 text-sm font-medium text-blue-600 bg-blue-100 rounded-full">
+          <span ref={heroTextRef} className="inline-block px-4 py-1 text-sm font-medium text-[#048ba8] dark:text-[#4db4c7] bg-[#048ba8]/10 dark:bg-[#048ba8]/20 rounded-full">
             Smart Asset Management Platform
           </span>
 
-          <h1 ref={heroTextRef} className="text-4xl md:text-5xl xl:text-6xl font-bold text-black/80 leading-tight">
+          <h1 ref={heroTextRef} className="text-4xl md:text-5xl xl:text-6xl font-bold text-slate-900 dark:text-slate-100 leading-tight">
             Track, Manage & Optimize <br />
-            <span className="text-blue-600">Your Company Assets</span>
+            <span className="text-[#2e4057] dark:text-[#5c6d7d]">Your Company Assets</span>
           </h1>
 
-          <p ref={heroTextRef} className="text-gray-600 text-lg max-w-xl">
+          <p ref={heroTextRef} className="text-slate-600 dark:text-slate-400 text-lg max-w-xl">
             A centralized solution to manage assets, monitor usage, control requests,
             and improve operational efficiency — all in one dashboard.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-4">
-            <Link to='/login' className="px-6 cursor-pointer py-3 rounded-lg bg-blue-600 text-white font-semibold shadow hover:bg-blue-700 transition">
+            <Link to='/login' className="px-6 cursor-pointer py-3 rounded-xl bg-[#2e4057] dark:bg-[#5c6d7d] text-white font-semibold shadow-lg hover:bg-[#293a4f] dark:hover:bg-[#2e4057] transition">
               Get Started
             </Link>
 
-            <button ref={heroTextRef} className="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition">
+            <button ref={heroTextRef} className="px-6 py-3 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold hover:bg-slate-100 dark:hover:bg-slate-700 transition">
               View Demo
             </button>
           </div>
 
-          <div ref={heroTextRef} className="flex items-center gap-6 pt-6 text-sm text-gray-500">
+          <div ref={heroTextRef} className="flex items-center gap-6 pt-6 text-sm text-slate-600 dark:text-slate-400">
             <span>✔ Secure</span>
             <span>✔ Role Based Access</span>
             <span>✔ Real-time Tracking</span>
@@ -156,7 +156,7 @@ const Banner = () => {
         {/* RIGHT CONTENT (Swiper / Image / Dashboard Mock) */}
         {/* RIGHT CONTENT (Swiper / Dashboard Preview) */}
         <div className="relative hero-visual">
-          <div className="relative rounded-2xl shadow-2xl bg-white p-4 overflow-hidden">
+          <div className="relative rounded-2xl shadow-2xl bg-white dark:bg-slate-800 p-4 overflow-hidden border border-slate-200 dark:border-slate-700">
             <Swiper
               modules={[Autoplay, Pagination]}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -228,17 +228,17 @@ const Banner = () => {
           </div>
 
           {/* Floating cards */}
-          <div ref={assetsCardRef} className="absolute z-10 -top-6 -left-6 bg-white shadow-lg rounded-xl p-4 w-40 text-sm">
-            <p className="font-semibold text-gray-800">Assets</p>
-            <p className="text-blue-600 text-xl font-bold">
+          <div ref={assetsCardRef} className="absolute z-10 -top-6 -left-6 bg-white dark:bg-slate-800 shadow-lg rounded-xl p-4 w-40 text-sm border border-slate-200 dark:border-slate-700">
+            <p className="font-semibold text-slate-900 dark:text-slate-100">Assets</p>
+            <p className="text-[#2e4057] dark:text-[#5c6d7d] text-xl font-bold">
               {assetsCount.toLocaleString()}
             </p>
 
           </div>
 
-          <div ref={assetsCardRef} className="absolute z-9 -bottom-6 -right-6 bg-white shadow-lg rounded-xl p-4 w-40 text-sm">
-            <p className="font-semibold text-gray-800">Requests</p>
-            <p className="text-green-600 text-xl font-bold">98%</p>
+          <div ref={assetsCardRef} className="absolute z-9 -bottom-6 -right-6 bg-white dark:bg-slate-800 shadow-lg rounded-xl p-4 w-40 text-sm border border-slate-200 dark:border-slate-700">
+            <p className="font-semibold text-slate-900 dark:text-slate-100">Requests</p>
+            <p className="text-[#048ba8] dark:text-[#4db4c7] text-xl font-bold">98%</p>
           </div>
         </div>
 

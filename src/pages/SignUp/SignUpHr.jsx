@@ -117,7 +117,7 @@ const SignUpHr = () => {
                         {/* Company Logo Upload */}
                         <div>
                             <label className="block text-sm font-medium leading-6 text-text-light mb-1.5">Company Logo</label>
-                            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-border-light dark:border-border-dark px-6 py-8 bg-white dark:bg-background-dark   transition-colors">
+                            <div className="mt-2 flex justify-center rounded-lg border border-dashed border-border-light dark:border-border-dark px-6 py-8 bg-background-dark   transition-colors">
                                 <div className="text-center">
                                     <span className="material-symbols-outlined text-gray-300 text-5xl mx-auto block mb-2">cloud_upload</span>
                                     <div className="mt-2 flex text-sm leading-6 text-gray-600 justify-center">
